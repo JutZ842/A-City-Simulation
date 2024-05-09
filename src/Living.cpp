@@ -2,31 +2,31 @@
 
 Living::Living(){}
 
-void Living::moveIn() {
+float Living::calcSol()
+{
+	return 0.0f;
 }
 
-void Living::moveOut() {
+float Living::calcHappy()
+{
+	//some unimportant calculations
+	return ( sol + health ) / numPop;
 }
 
-unsigned int Living::getNumPop() {
-	return numPop;
-}
-
-unsigned int Living::getMaxPop() {
-	return maxPop;
+float Living::calcHealth()
+{
+	return 0.0f;
 }
 
 float Living::getSol() {
 	return sol;
 }
 
-float Living::getHappiness()
-{
+float Living::getHappiness() {
 	return happiness;
 }
 
-float Living::getHealth()
-{
+float Living::getHealth() {
 	return health;
 }
 

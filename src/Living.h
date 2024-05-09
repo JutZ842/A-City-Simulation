@@ -1,22 +1,20 @@
 #pragma once
 #include "Building.h"
 
-class Living : protected Building
+class Living : public Building
 {
 	protected:
-		unsigned int numPop;
-		unsigned int maxPop;
 		float sol;
 		float happiness;
 		float health;
 
 	public:
 		Living();
-		void moveIn();
-		void moveOut();
 
-		unsigned int getNumPop();
-		unsigned int getMaxPop();
+		float calcSol();
+		float calcHappy();
+		float calcHealth();
+
 		float getSol();
 		float getHappiness();
 		float getHealth();

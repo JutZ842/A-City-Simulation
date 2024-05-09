@@ -1,7 +1,7 @@
 #pragma once
 #include "Living.h"
-class SmallHouse : private Living
+class SmallHouse : public Living
 {
-	private:
 	public:
+		SmallHouse();
 };
