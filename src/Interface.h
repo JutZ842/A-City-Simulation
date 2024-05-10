@@ -18,7 +18,8 @@ class Interface
 		void upgradeScreen(char userIn);
 		void removeScreen(char userIn);
 
-		int calcPeople(std::vector<SmallHouse> sh);
+		template <typename T>
+		int calcPeople(std::vector<T>sh);
 
 		void InterfaceHandler();
 };

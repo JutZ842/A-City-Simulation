@@ -12,6 +12,7 @@ void Interface::InterfaceHandler() {
 		std::cout << "Wood: " << inv[wood] << "\n";
 		std::cout << "Pops\n";
 		std::cout << "You currently have " << calcPeople(sh) << " Pops\n";
+		std::cout << "You currently have " << calcPeople(lj) << " employed Pops\n";
 		for (size_t i = 0; i < 64; i++) {
 			std::cout << "-";
 		}
@@ -74,7 +75,8 @@ void Interface::removeScreen(char userIn) {
 	}
 }
 
-int Interface::calcPeople(std::vector<SmallHouse>sh) {
+template <typename T>
+int Interface::calcPeople(std::vector<T>sh) {
 	int curPop = 0;
 	for (auto& i : sh) {
 		curPop += i.getNumPop();
