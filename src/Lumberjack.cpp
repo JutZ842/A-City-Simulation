@@ -7,6 +7,7 @@ Lumberjack::Lumberjack() {
 	
 	numPop = 0;
 	maxPop = 10;
+	baseProd = 1;
+
 	product = wood;
-	productivity = 0;
 }

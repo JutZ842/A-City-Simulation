@@ -1,31 +1,20 @@
 #include "Production.h"
 
+
 Production::Production()
 {
 }
 
-void Production::hiring(int modifier) {
-	curJobs += modifier;
-}
-
-void Production::firing(int modifier) {
-	curJobs -= modifier;
-}
-
-int Production::getCurJobs() {
-	return curJobs;
-}
-
-int Production::getMaxJobs() {
-	return maxJobs;
+float Production::createGoods(int curJobs, int maxJobs) {
+	return baseProd * (curJobs / maxJobs);
 }
 
 int Production::getProduct() {
 	return product;
 }
-
-float Production::getProductivity() {
-	return productivity;
+//number between 0 and 1;modifies the good production
+float Production::getBaseProd() {
+	return baseProd;
 }
 
 Production::~Production() {

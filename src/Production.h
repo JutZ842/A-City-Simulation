@@ -1,22 +1,21 @@
 #pragma once
 #include "Building.h"
-#include "UnorderedHeader.h"
+#include "Ressources.h"
+
 class Production : public Building
 {
 	protected:
-		unsigned int curJobs;
-		unsigned int maxJobs;
+		float baseProd;
+
 		products product;
-		float productivity;
+
+		float createGoods(int curJobs, int maxJobs);
+
 	public:
 		Production();
-		void hiring(int modifier);
-		void firing(int modifier);
 
-		int getCurJobs();
-		int getMaxJobs();
 		int getProduct();
-		float getProductivity();
+		float getBaseProd();
 		~Production();
 };
 

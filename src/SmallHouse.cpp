@@ -6,7 +6,7 @@ SmallHouse::SmallHouse()
 		hp = 100;
 		costs = 2; //2 turns
 
-		numPop = 0;
+		numPop = 5;
 		maxPop = 10;
 		sol = 0.0f;
 		happiness = 0.0f;
