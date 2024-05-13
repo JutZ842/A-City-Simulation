@@ -22,14 +22,5 @@ class Interface
 		std::vector<SmallHouse>sh;
 		std::vector<Lumberjack>lj;
 
-		
-
-
-		//template <typename T>
-		//int calcPeople(std::vector<T>sh, int curPop);
-
-		//template<typename T>
-		//int generateGoods(std::vector<Lumberjack> g);
-
 };
 

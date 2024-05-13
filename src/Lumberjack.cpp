@@ -8,7 +8,7 @@ Lumberjack::Lumberjack() {
 	
 	numPop = 2;
 	maxPop = 10;
-	baseProd = 1;
+	baseProd = 2;
 
 	product = InvManagement::wood;
 

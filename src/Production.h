@@ -9,12 +9,12 @@ class Production : public Building
 	protected:
 		float baseProd;
 		InvManagement::products product;
-		float createGoods(int curJobs, int maxJobs);
 
 	public:
 		Production() {}
 
 		InvManagement::products getProduct();
+		int createGoods(float curJobs, int maxJobs);
 		float getBaseProd();
 		~Production();
 };

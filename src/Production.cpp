@@ -2,8 +2,11 @@
 
 #include "Production.h"
 
-float Production::createGoods(int curJobs, int maxJobs) {
-	return baseProd * (curJobs / maxJobs);
+
+int Production::createGoods(float curJobs, int maxJobs) {
+	int t = int(baseProd * (curJobs / maxJobs));
+	std::cout << "T: " << t << "\n";
+	return t;
 }
 
 InvManagement::products Production::getProduct() {

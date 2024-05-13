@@ -10,7 +10,7 @@ int Interface::interfaceHandler(int curLivPop, int curWorkPop, int turn) {
 
 	std::cout << "Current Turn: " << turn << std::endl;
 	std::cout << "Ressources\n";
-	std::cout << "Wood: " << InvManagement::get().getStock(InvManagement::wood) << InvManagement::wood << "\n";
+	std::cout << "Wood: " << InvManagement::get().getStock(InvManagement::wood) << "\n";
 	std::cout << "Pops\n";
 	std::cout << "You currently have " << curLivPop << " Pops\n";
 	std::cout << "You currently have " << curWorkPop << " employed Pops\n";
@@ -73,11 +73,4 @@ void Interface::removeScreen(char userIn) {
 	}
 }
 
-//template <typename T>
-//int Interface::generateGoods(std::vector<Lumberjack>g) {
-	
-//	for (auto& i : g) {
-//		inv[i.getProduct()] += 2;
-//	}
 
-//}

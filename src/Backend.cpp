@@ -29,6 +29,8 @@ Backend::Backend() {
 		updatePopInc(assets.sh);
 		updatePopInc(assets.lj);
 
+		generateGoods(assets.lj);
+
 		Game.move++;
 	}
 	
@@ -63,4 +65,14 @@ void Backend::updatePopInc(std::vector<T>& bt) {
 		i.moveIn(2);
 
 	}
+}
+
+template <typename T>
+void Backend::generateGoods(std::vector<T>& g) {
+
+	for (auto& i : g) {
+		std::cout << "Info string!" << "i.getNumPop()" << i.getNumPop() << "\nmaxpop" << i.getMaxPop()  << std::endl;
+		InvManagement::get().addToStock(i.getProduct(), i.createGoods(i.getNumPop(), i.getMaxPop()));
+	}
+
 }

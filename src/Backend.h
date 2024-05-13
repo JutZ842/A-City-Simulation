@@ -3,6 +3,8 @@
 #include <map>
 
 #include "Interface.h"
+#include "InvManagement.h"
+
 #include "SmallHouse.h"
 #include "Lumberjack.h"
 
@@ -29,6 +31,7 @@ class Backend
 		struct {
 			int liv;
 			int work;
+			int unemployed;
 		} pops;
 
 		struct {
@@ -46,6 +49,9 @@ class Backend
 
 		template<typename T>
 		void updatePopInc(std::vector<T>& bt);
+
+		template<typename T>
+		void generateGoods(std::vector<T>& g);
 
 		//todo make all of that private and pass by value or reference
 
