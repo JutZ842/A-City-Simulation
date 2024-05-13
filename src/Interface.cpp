@@ -1,18 +1,19 @@
-#include "Interface.h"
-#include "Ressources.h"
 #include <iostream>
 
-void Interface::InterfaceHandler() {
-	bool stop = false;
+#include "InvManagement.h"
+#include "Interface.h"
 
+
+int Interface::interfaceHandler(int curLivPop, int curWorkPop) {
+	bool stop = false;
 	while (stop == false) {
 		std::cout << "\n\tPlease enter the number to the corresponding option\n\n";
 
 		std::cout << "Ressources\n";
-		std::cout << "Wood: " << inv[wood] << "\n";
+		std::cout << "Wood: " << InvManagement::get().getStock(InvManagement::wood) << "\n";
 		std::cout << "Pops\n";
-		std::cout << "You currently have " << calcPeople(sh) << " Pops\n";
-		std::cout << "You currently have " << calcPeople(lj) << " employed Pops\n";
+		std::cout << "You currently have " << curLivPop << " Pops\n";
+		std::cout << "You currently have " << curWorkPop << " employed Pops\n";
 		for (size_t i = 0; i < 64; i++) {
 			std::cout << "-";
 		}
@@ -29,19 +30,17 @@ void Interface::InterfaceHandler() {
 		
 		switch (tolower(userIn)) {
 		case '1':
-			sh.push_back(SmallHouse());
-			std::cout << "You have now " << sh.size() << " SmallHouses\n";
+			return 1;
 			break;
 		case '2':
-			lj.push_back(Lumberjack());
-			std::cout << "You have now " << lj.size() << " Lumberjacks\n";
+			return 2;
 			break;
 		case '3':
 			sh.pop_back();
 			std::cout << "You have now " << sh.size() << " SmallHouses\n";
 			break;
-			//case 'r' | 'R':
-				//todo fix -> userIn will always be r or R if this is called; new userIn required
+			//case 'r':
+				//todo fix -> userIn will always be r if this is called; new userIn required
 				//removeScreen(userIn);
 		case 'e':
 			stop = true;
@@ -51,7 +50,7 @@ void Interface::InterfaceHandler() {
 			std::cout << "-";
 		}
 	}
-
+	return 0;
 }
 
 void Interface::buildScreen(char userIn) {
@@ -75,10 +74,19 @@ void Interface::removeScreen(char userIn) {
 	}
 }
 
-template <typename T>
-int Interface::calcPeople(std::vector<T>sh) {
-	int curPop = 0;
-	for (auto& i : sh) {
-		curPop += i.getNumPop();
-	}return curPop;
-}
+//template <typename T>
+//int Interface::generateGoods(std::vector<Lumberjack>g) {
+	
+//	for (auto& i : g) {
+//		inv[i.getProduct()] += 2;
+//	}
+
+//}
+
+//template <typename T>
+//int calcPeople(std::vector<T>sh) {
+//	int curPop = 0;
+//	for (auto& i : sh) {
+//		curPop += i.getNumPop();
+//	}return curPop;
+//}

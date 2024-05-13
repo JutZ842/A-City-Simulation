@@ -1,11 +1,13 @@
-#include <iostream>
-#include "Interface.h"
-#include "Ressources.h"
+#include "Backend.h"
+
+void start();
+
 
 int main() {
-	Interface();
-	
-	//test();
-	char c;
-	std::cin >> c;
+	start();
+}
+
+void start() {
+	Backend calc;
+
 }

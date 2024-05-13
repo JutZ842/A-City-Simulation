@@ -1,26 +1,34 @@
 #pragma once
 #include <vector>
+#include <map>
+
 #include "SmallHouse.h"
 #include "Lumberjack.h"
 
 class Interface
 {
 	public:
-		Interface() {
-			InterfaceHandler();
-		}
-		std::vector<SmallHouse>sh;
-		std::vector<Lumberjack>lj;
-
+		int interfaceHandler(int livPop, int workPop);
+		//void getInv(const std::map<products, float>& inv) {
+		//	
+		//}
 	private:
 		char userIn;
 		void buildScreen(char userIn);
 		void upgradeScreen(char userIn);
 		void removeScreen(char userIn);
 
-		template <typename T>
-		int calcPeople(std::vector<T>sh);
+		std::vector<SmallHouse>sh;
+		std::vector<Lumberjack>lj;
 
-		void InterfaceHandler();
+		
+
+
+		//template <typename T>
+		//int calcPeople(std::vector<T>sh, int curPop);
+
+		//template<typename T>
+		//int generateGoods(std::vector<Lumberjack> g);
+
 };
 

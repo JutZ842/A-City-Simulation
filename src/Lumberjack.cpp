@@ -1,6 +1,7 @@
+#include "InvManagement.h"
 #include "Lumberjack.h"
 
-Lumberjack::Lumberjack() {
+Lumberjack::Lumberjack() {	
 	spaceUsed = 1;
 	hp = 120;
 	costs = 1;
@@ -9,5 +10,9 @@ Lumberjack::Lumberjack() {
 	maxPop = 10;
 	baseProd = 1;
 
-	product = wood;
+	product = InvManagement::wood;
+
+
+	createGoods(getNumPop(), getMaxPop());
+
 }

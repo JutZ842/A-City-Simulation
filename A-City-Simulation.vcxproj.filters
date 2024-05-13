@@ -36,6 +36,12 @@
     <ClCompile Include="src\Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InvManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Building.h">
@@ -50,13 +56,16 @@
     <ClInclude Include="src\Production.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ressources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Lumberjack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Backend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InvManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

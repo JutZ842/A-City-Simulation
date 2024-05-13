@@ -1,7 +1,6 @@
 #include "SmallHouse.h"
 
-SmallHouse::SmallHouse()
-{
+SmallHouse::SmallHouse() {
 		spaceUsed = 1;
 		hp = 100;
 		costs = 2; //2 turns

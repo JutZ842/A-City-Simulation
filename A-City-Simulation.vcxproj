@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\InvManagement.cpp" />
+    <ClCompile Include="src\Backend.cpp" />
     <ClCompile Include="src\Interface.cpp" />
     <ClCompile Include="src\Lumberjack.cpp" />
     <ClCompile Include="src\Production.cpp" />
@@ -152,13 +154,14 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\InvManagement.h" />
+    <ClInclude Include="src\Backend.h" />
     <ClInclude Include="src\Interface.h" />
     <ClInclude Include="src\Lumberjack.h" />
     <ClInclude Include="src\Production.h" />
     <ClInclude Include="src\SmallHouse.h" />
     <ClInclude Include="src\Living.h" />
     <ClInclude Include="src\Building.h" />
-    <ClInclude Include="src\Ressources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
