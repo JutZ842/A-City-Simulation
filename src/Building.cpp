@@ -5,7 +5,10 @@ Building::Building() {
 }
 
 void Building::moveIn(int modifier) {
-    numPop += modifier;
+    //todo can lead to the problem that houses wont fill if modifier is to high
+    if (numPop + modifier < maxPop) {
+        numPop += modifier;
+    }
 }
 
 void Building::moveOut(int modifier) {

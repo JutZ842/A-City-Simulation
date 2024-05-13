@@ -8,15 +8,16 @@
 class Interface
 {
 	public:
-		int interfaceHandler(int livPop, int workPop);
+		//todo in theory if this is the only function that gets called through the backend this could be the constructor
+		int interfaceHandler(int livPop, int workPop, int turn);
 		//void getInv(const std::map<products, float>& inv) {
 		//	
 		//}
 	private:
 		char userIn;
-		void buildScreen(char userIn);
-		void upgradeScreen(char userIn);
-		void removeScreen(char userIn);
+		void buildScreen(const char userIn);
+		void upgradeScreen(const char userIn);
+		void removeScreen(const char userIn);
 
 		std::vector<SmallHouse>sh;
 		std::vector<Lumberjack>lj;
