@@ -1,2 +1,12 @@
-﻿  Building.cpp
+﻿  Backend.cpp
+c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(61,54): warning C4018: '>=': signed/unsigned mismatch
+c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(22): message : see reference to function template instantiation 'void Backend::build<SmallHouse>(T &,std::vector<SmallHouse,std::allocator<SmallHouse>> &)' being compiled
+          with
+          [
+              T=SmallHouse
+          ]
+c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(86,76): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(36): message : see reference to function template instantiation 'void Backend::generateGoods<Lumberjack>(std::vector<Lumberjack,std::allocator<Lumberjack>> &)' being compiled
+  main.cpp
+  Generating Code...
   A-City-Simulation.vcxproj -> c:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe

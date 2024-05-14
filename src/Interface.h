@@ -2,25 +2,29 @@
 #include <vector>
 #include <map>
 
-#include "SmallHouse.h"
-#include "Lumberjack.h"
-
 class Interface
 {
 	public:
 		//todo in theory if this is the only function that gets called through the backend this could be the constructor
-		int interfaceHandler(int livPop, int workPop, int turn);
+		Interface(const int& curLivPop, const int& curWorkPop, const int& turn);
 		//void getInv(const std::map<products, float>& inv) {
 		//	
 		//}
+		int InterfaceInit();
+		void updateCLP(const int& curLivPop);
+		void updateCWP(const int& curWorkPop);
+		void updateT(const int& turn);
 	private:
-		char userIn;
-		void buildScreen(const char userIn);
-		void upgradeScreen(const char userIn);
-		void removeScreen(const char userIn);
+		int clP;
+		int cwP;
+		int t;
+		
+		char i;
 
-		std::vector<SmallHouse>sh;
-		std::vector<Lumberjack>lj;
-
+		void infoScreen();
+		int standardScreen();
+		int buildScreen();
+		int upgradeScreen();
+		int removeScreen();
 };
 

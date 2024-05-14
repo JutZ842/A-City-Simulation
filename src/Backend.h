@@ -39,7 +39,6 @@ class Backend
 		} assets;
 
 		bool et = false;
-		Interface gui;
 		SmallHouse sh;
 		Lumberjack lj;
 
@@ -59,4 +58,7 @@ class Backend
 		void generateGoods(std::vector<T>& g);
 
 		void generateConsume(SmallHouse& bt);
+
+		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
+
 };

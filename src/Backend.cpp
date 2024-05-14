@@ -5,6 +5,8 @@
 Backend::Backend() {
 	pops.liv = 0;
 	pops.work = 0;
+	Interface gui(calcPeople(assets.sh, pops.liv), calcPeople(assets.lj, pops.work), game.move);
+
 	
 	//game loop
 	while (true) {
@@ -12,9 +14,9 @@ Backend::Backend() {
 		//turn loop
 		//user input
 		InvManagement::get().addToStock(InvManagement::wood, 10);
-
+		updateGUI(gui, calcPeople(assets.sh, pops.liv), calcPeople(assets.lj, pops.work), game.move);
 		while (et == false) {
-			int action = gui.interfaceHandler(calcPeople(assets.sh, pops.liv), calcPeople(assets.lj, pops.work), game.move);
+			int action = gui.InterfaceInit();
 
 			if (action == 1) {
 				build(sh, assets.sh);
@@ -22,7 +24,7 @@ Backend::Backend() {
 			if (action == 2) {
 				//build(lj);
 			}
-			if (action == 3) {
+			if (action == 10) {
 				et = true;
 			}
 		}
@@ -37,6 +39,13 @@ Backend::Backend() {
 	}
 	
 }
+
+void Backend::updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t) {
+	gui.updateCLP(clP);
+	gui.updateCWP(cwP);
+	gui.updateT(t);
+}
+
 //calculates the current number of pops living/working in whole city
 template <typename T>
 int Backend::calcPeople(std::vector<T>sh, int curPop) {
@@ -77,3 +86,4 @@ void Backend::generateGoods(std::vector<T>& g) {
 		InvManagement::get().addToStock(i.getProduct(), i.createGoods(i.getNumPop(), i.getMaxPop()));
 	}
 }
+

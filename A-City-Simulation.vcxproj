@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Events.cpp" />
     <ClCompile Include="src\Farm.cpp" />
     <ClCompile Include="src\InvManagement.cpp" />
     <ClCompile Include="src\Backend.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Events.h" />
     <ClInclude Include="src\Farm.h" />
     <ClInclude Include="src\InvManagement.h" />
     <ClInclude Include="src\Backend.h" />
