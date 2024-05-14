@@ -1,21 +1,25 @@
 #pragma once
 #include <string>
+#include "InvManagement.h"
 
 class Building
 {
 	protected:
 		unsigned int spaceUsed;
 		unsigned int hp;
-		unsigned int costs;
+		unsigned int bt;
 		unsigned int buildingCount;
 
 		unsigned int numPop;
 		unsigned int maxPop;
 
+		unsigned int costs;
+		InvManagement::products buildMat;
+
 		std::string type;
 
 	public:
-		Building();
+		Building() {}
 
 		void moveIn(int modifier);
 		void moveOut(int modifier);
@@ -24,9 +28,12 @@ class Building
 		unsigned int getMaxPop();
 
 		unsigned int getHp();
-		unsigned int getCost();
+		unsigned int buildTime();
 		unsigned int getCount();
 		unsigned int getSpaceUsed();
+
+		unsigned int getCosts();
+		InvManagement::products getBuildMat();
 		~Building();
 
 };

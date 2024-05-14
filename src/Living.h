@@ -4,9 +4,15 @@
 class Living : public Building
 {
 	protected:
+		struct Consum {
+			float baseConsum;
+			InvManagement::products consumProduct;
+		};
+
 		float sol;
 		float happiness;
 		float health;
+
 
 	public:
 		Living();
@@ -18,6 +24,8 @@ class Living : public Building
 		float getSol();
 		float getHappiness();
 		float getHealth();
+		float getConsum();
+
 		~Living();
 };
 

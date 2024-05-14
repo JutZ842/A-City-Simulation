@@ -1,7 +1,5 @@
 #include "InvManagement.h"
 
-
-
 int InvManagement::getStock(const products& product) {
 	return inv[product];
 }

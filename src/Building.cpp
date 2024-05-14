@@ -1,13 +1,10 @@
 #include "Building.h"
 
-Building::Building() {
-
-}
-
 void Building::moveIn(int modifier) {
-    //todo can lead to the problem that houses wont fill if modifier is to high
-    if (numPop + modifier < maxPop) {
+    if (numPop + modifier <= maxPop) {
         numPop += modifier;
+    }else {
+        numPop = maxPop;
     }
 }
 
@@ -27,8 +24,8 @@ unsigned int Building::getHp() {
     return hp;
 }
 
-unsigned int Building::getCost() {
-    return costs;
+unsigned int Building::buildTime() {
+    return bt;
 }
 
 unsigned int Building::getCount(){
@@ -37,6 +34,13 @@ unsigned int Building::getCount(){
 
 unsigned int Building::getSpaceUsed(){
     return spaceUsed;
+}
+
+unsigned int Building::getCosts() {
+    return costs;
+}
+InvManagement::products Building::getBuildMat() {
+    return buildMat;
 }
 
 Building::~Building(){}

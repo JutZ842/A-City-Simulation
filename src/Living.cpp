@@ -30,4 +30,9 @@ float Living::getHealth() {
 	return health;
 }
 
+float Living::getConsum()
+{
+	return 0.0f;
+}
+
 Living::~Living(){}

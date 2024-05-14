@@ -11,7 +11,7 @@ int Interface::interfaceHandler(int curLivPop, int curWorkPop, int turn) {
 	std::cout << "Current Turn: " << turn << std::endl;
 	std::cout << "Ressources\n";
 	std::cout << "Wood: " << InvManagement::get().getStock(InvManagement::wood) << "\n";
-	std::cout << "Pops\n";
+	std::cout << "\nPops\n";
 	std::cout << "You currently have " << curLivPop << " Pops\n";
 	std::cout << "You currently have " << curWorkPop << " employed Pops\n";
 	for (size_t i = 0; i < 64; i++) {

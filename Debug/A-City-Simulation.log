@@ -1,10 +1,2 @@
-﻿  Backend.cpp
-C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(75,76): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(32): message : see reference to function template instantiation 'void Backend::generateGoods<Lumberjack>(std::vector<Lumberjack,std::allocator<Lumberjack>> &)' being compiled
-  Interface.cpp
-  Lumberjack.cpp
-C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Lumberjack.cpp(16,23): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-  Production.cpp
-  main.cpp
-  Generating Code...
-  A-City-Simulation.vcxproj -> C:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe
+﻿  Building.cpp
+  A-City-Simulation.vcxproj -> c:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe

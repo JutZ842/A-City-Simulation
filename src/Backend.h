@@ -13,8 +13,7 @@ class Backend
 	public:
 		Backend();
 
-		template <typename T>
-		int calcPeople(std::vector<T> sh, int curPop);
+
 	
 	private:		
 		struct Save {
@@ -26,7 +25,7 @@ class Backend
 			int move = 0;
 			std::vector<Save>history;
 
-		} Game;
+		} game;
 
 		struct {
 			int liv;
@@ -40,12 +39,18 @@ class Backend
 		} assets;
 
 		bool et = false;
+		Interface gui;
+		SmallHouse sh;
+		Lumberjack lj;
 
 		template <typename T>
-		void build(std::vector<T>& bt);
+		void build(T &bt, std::vector<T> &v);
 
 		template<typename T>
 		void remove(std::vector<T>& bt);
+
+		template <typename T>
+		int calcPeople(const std::vector<T> sh, int curPop);
 
 		template<typename T>
 		void updatePopInc(std::vector<T>& bt);
@@ -53,16 +58,5 @@ class Backend
 		template<typename T>
 		void generateGoods(std::vector<T>& g);
 
-		//todo make all of that private and pass by value or reference
-
-
-
-		/*static void test() {
-			inv[wood] = 10.0f;
-
-			for (auto& [pk, am] : inv) {
-				std::cout << pk << "\n" << am << std::endl;
-			}
-		}*/
-
+		void generateConsume(SmallHouse& bt);
 };

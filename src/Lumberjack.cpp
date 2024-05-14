@@ -6,13 +6,12 @@ Lumberjack::Lumberjack() {
 	hp = 120;
 	costs = 1;
 	
-	numPop = 2;
+	numPop = 0;
 	maxPop = 10;
 	baseProd = 2;
 
 	product = InvManagement::wood;
 
 
-	createGoods(getNumPop(), getMaxPop());
 
 }
