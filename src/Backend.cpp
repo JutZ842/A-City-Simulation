@@ -42,16 +42,15 @@ Backend::Backend() {
 	
 }
 
-//todo doesnst get updated if theres only one building
-//maybe check if this happens to all update functions
 int Backend::generateConsume(SmallHouse& bt, const std::vector<SmallHouse>&v) {
+	std::cout << "Sizeof v: " << v.size() << "\n";
 	for (auto& i : v) {
-		auto temp = bt.getConsumption();
-		for (auto const& [good, quantity] : temp) {
+		for (auto const& [good, quantity] : bt.getConsumption()) {
 			if (InvManagement::get().getStock(good) - quantity >= 0) {
 				InvManagement::get().removeFromStock(good, quantity);
 			}
 			else{
+				//todo can trigger a starving event or whatever
 				return 1;
 			}
 		}
@@ -80,8 +79,8 @@ void Backend::build(T &bt, std::vector<T> &v) {
 	if (InvManagement::get().getStock(bt.getBuildMat()) >= bt.getCosts()) {
 		v.push_back(bt);
 		InvManagement::get().removeFromStock(bt.getBuildMat(), bt.getCosts());
+		std::cout << "You have now " << assets.sh.size() << " of Type " << "\n";
 	}
-	std::cout << "You have now " << assets.sh.size() << " of Type " << "\n";
 }
 
 template<typename T>
