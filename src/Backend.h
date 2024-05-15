@@ -8,13 +8,10 @@
 #include "SmallHouse.h"
 #include "Lumberjack.h"
 
-class Backend
-	{
+class Backend {
 	public:
 		Backend();
 
-
-	
 	private:		
 		struct Save {
 
@@ -49,7 +46,7 @@ class Backend
 		void remove(std::vector<T>& bt);
 
 		template <typename T>
-		int calcPeople(const std::vector<T> sh, int curPop);
+		int calcPeople(std::vector<T>& sh, int curPop);
 
 		template<typename T>
 		void updatePopInc(std::vector<T>& bt);
@@ -57,7 +54,7 @@ class Backend
 		template<typename T>
 		void generateGoods(std::vector<T>& g);
 
-		void generateConsume(SmallHouse& bt);
+		int generateConsume(SmallHouse& bt, const std::vector<SmallHouse>&v);
 
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 

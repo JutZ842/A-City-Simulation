@@ -1,15 +1,13 @@
 #include "SmallHouse.h"
 
 SmallHouse::SmallHouse() {
-		
-	Consum consum1;
 	
-	consum1.baseConsum = .1f;
-	consum1.consumProduct = InvManagement::wheat;
+	consumption[InvManagement::wheat] = 1;
+	consumption[InvManagement::wood] = 0;
+
 	spaceUsed = 1;
 	hp = 100;
 	bt = 2; //2 turns
-		
 	costs = 1;
 	buildMat = InvManagement::wood;
 
@@ -18,6 +16,7 @@ SmallHouse::SmallHouse() {
 	sol = 0.0f;
 	happiness = 0.0f;
 	health = 0.0f;
-
-
 }
+
+
+

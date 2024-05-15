@@ -30,9 +30,8 @@ float Living::getHealth() {
 	return health;
 }
 
-float Living::getConsum()
-{
-	return 0.0f;
+std::map<InvManagement::products, int> Living::getConsumption() {
+	return consumption;
 }
 
 Living::~Living(){}

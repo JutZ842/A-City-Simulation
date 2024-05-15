@@ -7,13 +7,14 @@ Backend::Backend() {
 	pops.work = 0;
 	Interface gui(calcPeople(assets.sh, pops.liv), calcPeople(assets.lj, pops.work), game.move);
 
-	
+	InvManagement::get().addToStock(InvManagement::wheat, 10);
 	//game loop
 	while (true) {
 		et = false;
 		//turn loop
 		//user input
 		InvManagement::get().addToStock(InvManagement::wood, 10);
+
 		updateGUI(gui, calcPeople(assets.sh, pops.liv), calcPeople(assets.lj, pops.work), game.move);
 		while (et == false) {
 			int action = gui.InterfaceInit();
@@ -34,10 +35,28 @@ Backend::Backend() {
 		updatePopInc(assets.lj);
 
 		generateGoods(assets.lj);
+		generateConsume(sh, assets.sh);
 
 		game.move++;
 	}
 	
+}
+
+//todo doesnst get updated if theres only one building
+//maybe check if this happens to all update functions
+int Backend::generateConsume(SmallHouse& bt, const std::vector<SmallHouse>&v) {
+	for (auto& i : v) {
+		auto temp = bt.getConsumption();
+		for (auto const& [good, quantity] : temp) {
+			if (InvManagement::get().getStock(good) - quantity >= 0) {
+				InvManagement::get().removeFromStock(good, quantity);
+			}
+			else{
+				return 1;
+			}
+		}
+	}
+	return 0;
 }
 
 void Backend::updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t) {
@@ -48,7 +67,7 @@ void Backend::updateGUI(Interface& gui, const int& clP, const int& cwP, const in
 
 //calculates the current number of pops living/working in whole city
 template <typename T>
-int Backend::calcPeople(std::vector<T>sh, int curPop) {
+int Backend::calcPeople(std::vector<T>&sh, int curPop) {
 	
 	for (auto& i : sh) {
 		curPop += i.getNumPop();
