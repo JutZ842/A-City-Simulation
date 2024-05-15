@@ -21,8 +21,8 @@ class Building
 	public:
 		Building() {}
 
-		void moveIn(int modifier);
-		void moveOut(int modifier);
+		void moveIn(const int& modifier);
+		void moveOut(const int& modifier);
 
 		unsigned int getNumPop();
 		unsigned int getMaxPop();

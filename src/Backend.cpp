@@ -23,7 +23,10 @@ Backend::Backend() {
 				build(sh, assets.sh);
 			}
 			if (action == 2) {
-				//build(lj);
+				build(lj, assets.lj);
+			}
+			if (action == 3) {
+				build(f, assets.f);
 			}
 			if (action == 10) {
 				et = true;
@@ -31,10 +34,14 @@ Backend::Backend() {
 		}
 		//all the generation stuff
 		//todo !
+		//todo a class might be beneficial to avoid blank repition
 		updatePopInc(assets.sh);
 		updatePopInc(assets.lj);
+		updatePopInc(assets.f);
 
 		generateGoods(assets.lj);
+		generateGoods(assets.f);
+
 		generateConsume(sh, assets.sh);
 
 		game.move++;
@@ -42,7 +49,8 @@ Backend::Backend() {
 	
 }
 
-int Backend::generateConsume(SmallHouse& bt, const std::vector<SmallHouse>&v) {
+template<typename T>
+int Backend::generateConsume(T& bt, const std::vector<T>&v) {
 	std::cout << "Sizeof v: " << v.size() << "\n";
 	for (auto& i : v) {
 		for (auto const& [good, quantity] : bt.getConsumption()) {

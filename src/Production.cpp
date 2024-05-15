@@ -3,7 +3,7 @@
 #include "Production.h"
 
 
-int Production::createGoods(float curJobs, int maxJobs) {
+int Production::createGoods(const float& curJobs, const int& maxJobs) {
 	return int(baseProd * (curJobs / maxJobs));
 }
 
@@ -15,5 +15,4 @@ float Production::getBaseProd() {
 	return baseProd;
 }
 
-Production::~Production() {
-}
+Production::~Production() {}

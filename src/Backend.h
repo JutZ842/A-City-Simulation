@@ -7,6 +7,7 @@
 
 #include "SmallHouse.h"
 #include "Lumberjack.h"
+#include "Farm.h"
 
 class Backend {
 	public:
@@ -30,17 +31,20 @@ class Backend {
 			int unemployed;
 		} pops;
 
+		//todo maybe a template class or something that makes adding assests easier
 		struct {
 			std::vector<SmallHouse>sh;
 			std::vector<Lumberjack>lj;
+			std::vector<Farm>f;
 		} assets;
 
 		bool et = false;
 		SmallHouse sh;
 		Lumberjack lj;
+		Farm f;
 
 		template <typename T>
-		void build(T &bt, std::vector<T> &v);
+		void build(T& bt, std::vector<T>& v);
 
 		template<typename T>
 		void remove(std::vector<T>& bt);
@@ -54,7 +58,8 @@ class Backend {
 		template<typename T>
 		void generateGoods(std::vector<T>& g);
 
-		int generateConsume(SmallHouse& bt, const std::vector<SmallHouse>&v);
+		template<typename T>
+		int generateConsume(T& bt, const std::vector<T>& v);
 
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 

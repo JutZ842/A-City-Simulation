@@ -1,6 +1,6 @@
 #include "Building.h"
 
-void Building::moveIn(int modifier) {
+void Building::moveIn(const int& modifier) {
     if (numPop + modifier <= maxPop) {
         numPop += modifier;
     }else {
@@ -8,7 +8,7 @@ void Building::moveIn(int modifier) {
     }
 }
 
-void Building::moveOut(int modifier) {
+void Building::moveOut(const int& modifier) {
     numPop -= modifier;
 }
 

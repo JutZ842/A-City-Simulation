@@ -11,20 +11,11 @@ class Living : public Building
 		float happiness;
 		float health;
 
-		struct Consumption {
-			float baseConsum;
-			InvManagement::products consumProduct;
-
-			Consumption(const InvManagement::products& p, const float& bC) : consumProduct(p), baseConsum(bC) {}
-			Consumption& getConsum(Consumption& cons) {
-				return cons;
-			}
-
-		};
-
-		std::map<InvManagement::products, int>consumption;
+		std::map<InvManagement::products, int> consumption;
 
 	public:
+		std::map<InvManagement::products, int> getConsumption();
+
 		Living();
 
 		float calcSol();
@@ -34,7 +25,6 @@ class Living : public Building
 		float getSol();
 		float getHappiness();
 		float getHealth();
-		std::map<InvManagement::products, int> getConsumption();
 
 		~Living();
 };
