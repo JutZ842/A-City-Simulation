@@ -120,10 +120,10 @@ int Interface::removeScreen() {
 
 	switch (i) {
 	case '1':
-		return 1;
+		return -1;
 		break;
 	case '2':
-		return 2;
+		return -2;
 		break;
 	case 'b':
 		standardScreen();
@@ -131,5 +131,3 @@ int Interface::removeScreen() {
 	return 0;
 
 }
-
-

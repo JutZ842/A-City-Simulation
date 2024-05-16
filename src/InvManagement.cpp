@@ -12,3 +12,7 @@ void InvManagement::addToStock(const products& product, const int& amount) {
 void InvManagement::removeFromStock(const products& product, const int& amount) {
 	(getStock(product) - amount) > 0 ? inv[product] -= amount : inv[product] = 0;
 }
+
+void InvManagement::setStock(const products& product, const int& amount) {
+	inv[product] = amount;
+}

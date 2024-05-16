@@ -15,12 +15,23 @@ class Backend {
 
 	private:		
 		struct Save {
+			int turn;
 
+			std::vector<SmallHouse>hisShv;
+			std::vector<Lumberjack>hisLjv;
+			std::vector<Farm>hisFv;
+
+			int liv;
+			int work;
+			int unemployed;
+
+			int wood;
+			int wheat;
 		};
 
 		struct {
 			//todo maybe store moves in a vector to make undo possible
-			int move = 0;
+			int turn = 0;
 			std::vector<Save>history;
 
 		} game;
@@ -64,4 +75,7 @@ class Backend {
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 
 		int updateUnemployed();
+
+		void save();
+		void undo(const int& t);
 };

@@ -24,6 +24,7 @@ class InvManagement
 		int getStock(const products& product);
 		void addToStock(const products& product, const int& amount);
 		void removeFromStock(const products& product, const int& amount);
+		void setStock(const products& product, const int& amount);
 
 	private:
 		std::map<products, float> inv;

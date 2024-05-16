@@ -6,7 +6,7 @@ Backend::Backend() {
 	pops.liv = 0;
 	pops.work = 0;
 
-	Interface gui(pops.liv, pops.work, game.move);
+	Interface gui(pops.liv, pops.work, game.turn);
 
 	InvManagement::get().addToStock(InvManagement::wheat, 10);
 	//game loop
@@ -18,7 +18,7 @@ Backend::Backend() {
 		pops.liv = calcPeople(assets.shv);
 		pops.work = calcPeople(assets.ljv);
 
-		updateGUI(gui, pops.liv, pops.work, game.move);
+		updateGUI(gui, pops.liv, pops.work, game.turn);
 		while (et == false) {
 			int action = gui.InterfaceInit();
 
@@ -35,6 +35,7 @@ Backend::Backend() {
 				et = true;
 			}
 		}
+		save();
 		//all the generation stuff
 		//todo !
 		//todo a class might be beneficial to avoid blank repition
@@ -53,8 +54,8 @@ Backend::Backend() {
 		if (pops.work > pops.liv) {
 			std::cout << "Error! Too many workers: \nWorkers: " << pops.work << "\nResidents: " << pops.work << "\n";
 		}
-
-		game.move++;
+		game.turn++;
+		undo(0);
 	}	
 }
 
@@ -67,7 +68,7 @@ int Backend::generateConsume(T& bt, const std::vector<T>&v) {
 			}
 			else{
 				//todo can trigger a starving event or whatever
-				return 1;
+				return -1;
 			}
 		}
 	}
@@ -119,10 +120,8 @@ void Backend::updatePopInc(std::vector<T> &bt) {
 		if (!i.getIsLiving()) {
 			if (updateUnemployed() < 2) {
 				modifier = pops.unemployed;
-				std::cout << "Modifier: " << modifier << "\n";
 			}
 		}
-		std::cout << "Modifier: " << modifier << "\n";
 		i.moveIn(modifier);
 	}
 }
@@ -132,4 +131,40 @@ void Backend::generateGoods(std::vector<T>& g) {
 	for (auto& i : g) {
 		InvManagement::get().addToStock(i.getProduct(), i.createGoods(i.getNumPop(), i.getMaxPop()));
 	}
+}
+
+void Backend::save() {
+	Save his;
+
+	his.turn = game.turn;
+
+	his.hisFv = assets.fv;
+	his.hisLjv = assets.ljv;
+	his.hisShv = assets.shv;
+
+	his.liv = pops.liv;
+	his.work = pops.work;
+	his.unemployed = pops.unemployed;
+
+	his.wood = InvManagement::get().getStock(InvManagement::wood);
+	his.wheat = InvManagement::get().getStock(InvManagement::wheat);
+
+	game.history.push_back(his);
+}
+
+void Backend::undo(const int& t) {
+	game.turn = game.history[t].turn;
+
+	assets.fv = game.history[t].hisFv;
+	assets.ljv = game.history[t].hisLjv;
+	assets.shv = game.history[t].hisShv;
+
+	pops.liv = game.history[t].liv;
+	pops.work = game.history[t].work;
+	pops.unemployed = game.history[t].unemployed;
+
+	InvManagement::get().setStock(InvManagement::wood, game.history[t].wood);
+	InvManagement::get().setStock(InvManagement::wheat, game.history[t].wheat);
+
+	game.history.erase(game.history.begin() + (t + 1), game.history.end());
 }
