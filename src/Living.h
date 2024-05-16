@@ -14,8 +14,6 @@ class Living : public Building
 		std::map<InvManagement::products, int> consumption;
 
 	public:
-		std::map<InvManagement::products, int> getConsumption();
-
 		Living();
 
 		float calcSol();
@@ -25,6 +23,7 @@ class Living : public Building
 		float getSol();
 		float getHappiness();
 		float getHealth();
+		std::map<InvManagement::products, int> getConsumption();
 
 		~Living();
 };

@@ -16,7 +16,7 @@ class Building
 		unsigned int costs;
 		InvManagement::products buildMat;
 
-		std::string type;
+		bool isLiving;
 
 	public:
 		Building() {}
@@ -34,6 +34,8 @@ class Building
 
 		unsigned int getCosts();
 		InvManagement::products getBuildMat();
+		bool getIsLiving();
+
 		~Building();
 
 };

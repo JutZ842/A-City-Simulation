@@ -2,6 +2,7 @@
 
 #include "Production.h"
 
+Production::Production() { isLiving = false; }
 
 int Production::createGoods(const float& curJobs, const int& maxJobs) {
 	return int(baseProd * (curJobs / maxJobs));

@@ -1,15 +1,11 @@
 #include "Building.h"
 
 void Building::moveIn(const int& modifier) {
-    if (numPop + modifier <= maxPop) {
-        numPop += modifier;
-    }else {
-        numPop = maxPop;
-    }
+    numPop + modifier <= maxPop ? numPop += modifier : numPop = maxPop;
 }
 
 void Building::moveOut(const int& modifier) {
-    numPop -= modifier;
+    numPop > 0 ? numPop -= modifier : numPop = 0;
 }
 
 unsigned int Building::getNumPop() {
@@ -41,6 +37,10 @@ unsigned int Building::getCosts() {
 }
 InvManagement::products Building::getBuildMat() {
     return buildMat;
+}
+
+bool Building::getIsLiving() {
+    return isLiving;
 }
 
 Building::~Building(){}

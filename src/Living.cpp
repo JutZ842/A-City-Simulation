@@ -1,6 +1,6 @@
 #include "Living.h"
 
-Living::Living(){}
+Living::Living() { isLiving = true; }
 
 float Living::calcSol()
 {

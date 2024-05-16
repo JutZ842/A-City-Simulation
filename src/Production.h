@@ -11,7 +11,7 @@ class Production : public Building
 		InvManagement::products product;
 
 	public:
-		Production() {}
+		Production();
 
 		InvManagement::products getProduct();
 		int createGoods(const float& curJobs, const int& maxJobs);

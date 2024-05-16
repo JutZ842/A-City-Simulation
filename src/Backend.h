@@ -26,16 +26,16 @@ class Backend {
 		} game;
 
 		struct {
-			int liv;
-			int work;
-			int unemployed;
+			int liv = 0;
+			int work = 0;
+			int unemployed = 0;
 		} pops;
 
 		//todo maybe a template class or something that makes adding assests easier
 		struct {
-			std::vector<SmallHouse>sh;
-			std::vector<Lumberjack>lj;
-			std::vector<Farm>f;
+			std::vector<SmallHouse>shv;
+			std::vector<Lumberjack>ljv;
+			std::vector<Farm>fv;
 		} assets;
 
 		bool et = false;
@@ -50,7 +50,7 @@ class Backend {
 		void remove(std::vector<T>& bt);
 
 		template <typename T>
-		int calcPeople(std::vector<T>& sh, int curPop);
+		int calcPeople(std::vector<T>& bt);
 
 		template<typename T>
 		void updatePopInc(std::vector<T>& bt);
@@ -63,4 +63,5 @@ class Backend {
 
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 
+		int updateUnemployed();
 };
