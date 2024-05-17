@@ -20,7 +20,7 @@ unsigned int Building::getHp() {
     return hp;
 }
 
-unsigned int Building::buildTime() {
+unsigned int Building::getBuildTime() {
     return bt;
 }
 

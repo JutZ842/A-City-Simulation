@@ -13,7 +13,20 @@ class Backend {
 	public:
 		Backend();
 
-	private:		
+	private:
+
+		//template<typename T>
+		struct BuildQueue {
+			SmallHouse& type;
+			std::vector<SmallHouse>v_type;
+
+			int time;
+
+			BuildQueue(SmallHouse& tp, std::vector<SmallHouse>tv, int t) : type(tp), v_type(tv), time(t) {}
+		};
+
+		std::vector<BuildQueue>bQueue;
+
 		struct Save {
 			int turn;
 
@@ -54,8 +67,13 @@ class Backend {
 		Lumberjack lj;
 		Farm f;
 
-		template <typename T>
-		void build(T& bt, std::vector<T>& v);
+		//template <typename T>
+		void build(SmallHouse& bt, std::vector<SmallHouse>& v);
+
+		void buildFactory();
+
+		template<typename T>
+		int addToBQueue(T& bt, std::vector<T>& v_bt);
 
 		template<typename T>
 		void remove(std::vector<T>& bt);
@@ -67,6 +85,9 @@ class Backend {
 		void updatePopInc(std::vector<T>& bt);
 
 		template<typename T>
+		void updatePopDec(std::vector<T>& bt);
+
+		template<typename T>
 		void generateGoods(std::vector<T>& g);
 
 		template<typename T>
@@ -75,6 +96,8 @@ class Backend {
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 
 		int updateUnemployed();
+
+		void updatePops();
 
 		void save();
 		void undo(const int& t);

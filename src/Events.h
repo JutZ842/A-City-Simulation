@@ -1,5 +1,6 @@
 #pragma once
-class Events
-{
+class Events {
+public:
+private:
 };
 

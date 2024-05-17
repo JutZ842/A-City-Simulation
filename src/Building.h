@@ -28,7 +28,7 @@ class Building
 		unsigned int getMaxPop();
 
 		unsigned int getHp();
-		unsigned int buildTime();
+		unsigned int getBuildTime();
 		unsigned int getCount();
 		unsigned int getSpaceUsed();
 

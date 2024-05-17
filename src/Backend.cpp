@@ -23,21 +23,19 @@ Backend::Backend() {
 			int action = gui.InterfaceInit();
 
 			if (action == 1) {
-				build(sh, assets.shv);
+				addToBQueue(sh, assets.shv);
 			}
-			if (action == 2) {
+			/*if (action == 2) {
 				build(lj, assets.ljv);
 			}
 			if (action == 3) {
 				build(f, assets.fv);
-			}
+			}*/
 			if (action == 10) {
 				et = true;
 			}
 		}
 		save();
-		//all the generation stuff
-		//todo !
 		//todo a class might be beneficial to avoid blank repition
 		///*Living update First*///
 		updatePopInc(assets.shv);
@@ -50,12 +48,17 @@ Backend::Backend() {
 		generateGoods(assets.fv);
 
 		generateConsume(sh, assets.shv);
+		
+		///*building generation*///
+		buildFactory();
 
 		if (pops.work > pops.liv) {
 			std::cout << "Error! Too many workers: \nWorkers: " << pops.work << "\nResidents: " << pops.work << "\n";
 		}
+		if (assets.shv.size() > 0) {
+			std::cout << "A Small House has been build. There are now: " << assets.shv.size() << "\n";
+		}
 		game.turn++;
-		undo(0);
 	}	
 }
 
@@ -96,11 +99,40 @@ int Backend::calcPeople(std::vector<T>&bt) {
 	return curPop;
 }
 
-template<typename T>
-void Backend::build(T &bt, std::vector<T> &v) {
-	if (InvManagement::get().getStock(bt.getBuildMat()) >= bt.getCosts()) {
+//template<typename T>
+void Backend::build(SmallHouse& bt, std::vector<SmallHouse>& v) {
 		v.push_back(bt);
+}
+
+//make a vector
+//put build element in vector
+//iterate through vector in every turn
+//reduce time to build by 1
+//if 0 build is called
+
+template<typename T>
+int Backend::addToBQueue(T& bt, std::vector<T>& v_bt) {
+	if (InvManagement::get().getStock(bt.getBuildMat()) >= bt.getCosts()) {
+		BuildQueue bq(bt, v_bt, bt.getBuildTime());
+		bQueue.push_back(bq);
+		std::cout << "A Building has been added to the queue " << bQueue.size() << "\n";
+
 		InvManagement::get().removeFromStock(bt.getBuildMat(), bt.getCosts());
+		return 0;
+	}else {
+		return -1;
+	}
+}
+
+void Backend::buildFactory() {
+	for (size_t i = 0; i < bQueue.size(); i++) {
+		if (bQueue[i].time == 0) {
+			build(bQueue[i].type, bQueue[i].v_type);
+		}
+		else {
+			bQueue[i].time--;
+		}
+		std::cout << "Value of i: " << i << "\nValue of t: " << bQueue[i].time << "\n";
 	}
 }
 
@@ -124,6 +156,14 @@ void Backend::updatePopInc(std::vector<T> &bt) {
 		}
 		i.moveIn(modifier);
 	}
+}
+
+template<typename T>
+void Backend::updatePopDec(std::vector<T>& bt) {
+}
+
+void Backend::updatePops() {
+	//todo there has to be smarter solution for the calculation than calling these functions back to back
 }
 
 template <typename T>
