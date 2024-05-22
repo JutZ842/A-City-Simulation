@@ -25,12 +25,12 @@ Backend::Backend() {
 			if (action == 1) {
 				addToBQueue(sh, assets.shv);
 			}
-			/*if (action == 2) {
-				build(lj, assets.ljv);
+			if (action == 2) {
+				//addToBQueue(lj, assets.ljv);
 			}
 			if (action == 3) {
-				build(f, assets.fv);
-			}*/
+				//addToBQueue(f, assets.fv);
+			}
 			if (action == 10) {
 				et = true;
 			}
@@ -51,6 +51,7 @@ Backend::Backend() {
 		
 		///*building generation*///
 		buildFactory();
+		std::cout << "Number of Small Houses: " << assets.shv.size() << "\n";
 
 		if (pops.work > pops.liv) {
 			std::cout << "Error! Too many workers: \nWorkers: " << pops.work << "\nResidents: " << pops.work << "\n";
@@ -99,40 +100,40 @@ int Backend::calcPeople(std::vector<T>&bt) {
 	return curPop;
 }
 
-//template<typename T>
-void Backend::build(SmallHouse& bt, std::vector<SmallHouse>& v) {
-		v.push_back(bt);
+template<typename T>
+void Backend::build(T& bt, std::vector<T>& v) {
+	std::cout << "Reached build! pre: " << v.size() << "\n";
+	v.push_back(bt);
+	std::cout << "aft: " << v.size() << "\n";
 }
-
-//make a vector
-//put build element in vector
-//iterate through vector in every turn
-//reduce time to build by 1
-//if 0 build is called
 
 template<typename T>
 int Backend::addToBQueue(T& bt, std::vector<T>& v_bt) {
 	if (InvManagement::get().getStock(bt.getBuildMat()) >= bt.getCosts()) {
-		BuildQueue bq(bt, v_bt, bt.getBuildTime());
+		BuildQueue bq(bt, &v_bt, bt.getBuildTime());
 		bQueue.push_back(bq);
 		std::cout << "A Building has been added to the queue " << bQueue.size() << "\n";
 
 		InvManagement::get().removeFromStock(bt.getBuildMat(), bt.getCosts());
 		return 0;
 	}else {
+		std::cout << "Theres not enough material to build this builing\n";
 		return -1;
 	}
 }
 
 void Backend::buildFactory() {
-	for (size_t i = 0; i < bQueue.size(); i++) {
+	for (size_t i = 0; i < bQueue.size();) {
+		std::cout << "Reached build factory\n";
 		if (bQueue[i].time == 0) {
-			build(bQueue[i].type, bQueue[i].v_type);
+			std::cout << "Reached build turn\n";
+			build(bQueue[i].type, *bQueue[i].v_type);
+			bQueue.erase(bQueue.begin() + i);
 		}
 		else {
 			bQueue[i].time--;
+			++i;
 		}
-		std::cout << "Value of i: " << i << "\nValue of t: " << bQueue[i].time << "\n";
 	}
 }
 
@@ -146,15 +147,18 @@ template<typename T>
 void Backend::updatePopInc(std::vector<T> &bt) {
 	int modifier;
 
-	for (auto& i : bt) {
+	std::cout << bt.size() << "\n";
+	for (int i = 0; i < bt.size();) {
 		modifier = 2;
 		//todo const value(2) for now will be calculated with a stupid calc
-		if (!i.getIsLiving()) {
+		if (!bt[i].getIsLiving()) {
 			if (updateUnemployed() < 2) {
 				modifier = pops.unemployed;
 			}
 		}
-		i.moveIn(modifier);
+		bt[i].moveIn(modifier);
+		std::cout << "numpops: " << bt[i].getNumPop() << "\n";
+		i++;
 	}
 }
 

@@ -17,12 +17,12 @@ class Backend {
 
 		//template<typename T>
 		struct BuildQueue {
-			SmallHouse& type;
-			std::vector<SmallHouse>v_type;
+			SmallHouse type;
+			std::vector<SmallHouse>* v_type;
 
 			int time;
 
-			BuildQueue(SmallHouse& tp, std::vector<SmallHouse>tv, int t) : type(tp), v_type(tv), time(t) {}
+			BuildQueue(SmallHouse& tp, std::vector<SmallHouse>* tv, int t) : type(tp), v_type(tv), time(t) {}
 		};
 
 		std::vector<BuildQueue>bQueue;
@@ -67,8 +67,8 @@ class Backend {
 		Lumberjack lj;
 		Farm f;
 
-		//template <typename T>
-		void build(SmallHouse& bt, std::vector<SmallHouse>& v);
+		template <typename T>
+		void build(T& bt, std::vector<T>& v);
 
 		void buildFactory();
 
