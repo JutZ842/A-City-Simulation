@@ -35,7 +35,7 @@ Backend::Backend() {
 				et = true;
 			}
 		}
-		//save();
+		save();
 		//todo a class might be beneficial to avoid blank repition
 		///*Living update First*///
 		updatePopInc(assets.shv);
