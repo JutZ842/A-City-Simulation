@@ -17,12 +17,14 @@ class Backend {
 
 		//template<typename T>
 		struct BuildQueue {
-			SmallHouse type;
-			std::vector<SmallHouse>* v_type;
+			Building* type;
+			std::vector<Building*>* v_type;
 
 			int time;
 
-			BuildQueue(SmallHouse& tp, std::vector<SmallHouse>* tv, int t) : type(tp), v_type(tv), time(t) {}
+			void decTurn() { time--; }
+
+			BuildQueue(Building* tp, std::vector<Building*>* tv, int t) : type(tp), v_type(tv), time(t) {}
 		};
 
 		std::vector<BuildQueue>bQueue;
@@ -30,9 +32,9 @@ class Backend {
 		struct Save {
 			int turn;
 
-			std::vector<SmallHouse>hisShv;
-			std::vector<Lumberjack>hisLjv;
-			std::vector<Farm>hisFv;
+			std::vector<Building*>hisShv;
+			std::vector<Building*>hisLjv;
+			std::vector<Building*>hisFv;
 
 			int liv;
 			int work;
@@ -57,9 +59,9 @@ class Backend {
 
 		//todo maybe a template class or something that makes adding assests easier
 		struct {
-			std::vector<SmallHouse>shv;
-			std::vector<Lumberjack>ljv;
-			std::vector<Farm>fv;
+			std::vector<Building*>shv;
+			std::vector<Building*>ljv;
+			std::vector<Building*>fv;
 		} assets;
 
 		bool et = false;
@@ -67,31 +69,28 @@ class Backend {
 		Lumberjack lj;
 		Farm f;
 
-		template <typename T>
-		void build(T& bt, std::vector<T>& v);
+		//template <typename T>
+		void build(Building* bt, std::vector<Building*>* v_bt);
 
 		void buildFactory();
 
-		template<typename T>
-		int addToBQueue(T& bt, std::vector<T>& v_bt);
+		//template<typename T>
+		int addToBQueue(Building* bt, std::vector<Building*>& v_bt, int turns);
 
 		template<typename T>
 		void remove(std::vector<T>& bt);
 
-		template <typename T>
-		int calcPeople(std::vector<T>& bt);
+		int calcPeople(std::vector<Building*>& bt);
 
-		template<typename T>
-		void updatePopInc(std::vector<T>& bt);
+		void updatePopInc(std::vector<Building*>& bt);
 
 		template<typename T>
 		void updatePopDec(std::vector<T>& bt);
 
-		template<typename T>
-		void generateGoods(std::vector<T>& g);
 
-		template<typename T>
-		int generateConsume(T& bt, const std::vector<T>& v);
+		void generateGoods(std::vector<Building*>& g);
+
+		int generateConsume(const std::vector<Building*>& v);
 
 		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
 

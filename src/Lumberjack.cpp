@@ -5,7 +5,9 @@ Lumberjack::Lumberjack() {
 	spaceUsed = 1;
 	hp = 120;
 	costs = 1;
-	
+	bt = 1;
+
+
 	numPop = 0;
 	maxPop = 10;
 	baseProd = 2;

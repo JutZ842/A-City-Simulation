@@ -10,13 +10,16 @@ class Building
 		unsigned int bt;
 		unsigned int buildingCount;
 
-		unsigned int numPop;
-		unsigned int maxPop;
+		unsigned int numPop = 0;
+		unsigned int maxPop = 0;
 
 		unsigned int costs;
 		InvManagement::products buildMat;
+		InvManagement::products product;
 
 		bool isLiving;
+		std::map<InvManagement::products, int> consumption;
+		float baseProd;
 
 	public:
 		Building() {}
@@ -35,6 +38,12 @@ class Building
 		unsigned int getCosts();
 		InvManagement::products getBuildMat();
 		bool getIsLiving();
+		std::map<InvManagement::products, int> getConsumption();
+		InvManagement::products getProduct();
+		int createGoods(const float& curJobs, const int& maxJobs);
+		float getBaseProd();
+		
+
 
 		~Building();
 

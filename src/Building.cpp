@@ -43,4 +43,20 @@ bool Building::getIsLiving() {
     return isLiving;
 }
 
+std::map<InvManagement::products, int> Building::getConsumption() {
+    return consumption;
+}
+
+int Building::createGoods(const float& curJobs, const int& maxJobs) {
+    return int(baseProd * (curJobs / maxJobs));
+}
+
+InvManagement::products Building::getProduct() {
+    return product;
+}
+//number between 0 and 1;modifies the good production
+float Building::getBaseProd() {
+    return baseProd;
+}
+
 Building::~Building(){}

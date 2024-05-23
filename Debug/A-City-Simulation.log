@@ -1,14 +1,4 @@
 ﻿  Backend.cpp
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(112,54): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(26): message : see reference to function template instantiation 'int Backend::addToBQueue<SmallHouse>(T &,std::vector<SmallHouse,std::allocator<SmallHouse>> &)' being compiled
-          with
-          [
-              T=SmallHouse
-          ]
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(151,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(41): message : see reference to function template instantiation 'void Backend::updatePopInc<SmallHouse>(std::vector<SmallHouse,std::allocator<SmallHouse>> &)' being compiled
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(176,76): warning C4244: 'argument': conversion from 'unsigned int' to 'const float', possible loss of data
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(47): message : see reference to function template instantiation 'void Backend::generateGoods<Lumberjack>(std::vector<Lumberjack,std::allocator<Lumberjack>> &)' being compiled
-  main.cpp
-  Generating Code...
+C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(115,55): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(175,79): warning C4244: 'argument': conversion from 'unsigned int' to 'const float', possible loss of data
   A-City-Simulation.vcxproj -> C:\Users\julja\Desktop\ACISI\Debug\A-City-Simulation.exe
