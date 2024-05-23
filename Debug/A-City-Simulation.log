@@ -1,4 +1,7 @@
 ﻿  Backend.cpp
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(115,55): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\julja\Desktop\ACISI\A-City-Simulation\src\Backend.cpp(175,79): warning C4244: 'argument': conversion from 'unsigned int' to 'const float', possible loss of data
-  A-City-Simulation.vcxproj -> C:\Users\julja\Desktop\ACISI\Debug\A-City-Simulation.exe
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(119,55): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(182,79): warning C4244: 'argument': conversion from 'unsigned int' to 'const float', possible loss of data
+  StarvingEvent.cpp
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\StarvingEvent.cpp(7,24): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  A-City-Simulation.vcxproj -> C:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe

@@ -154,6 +154,7 @@
     <ClCompile Include="src\Living.cpp" />
     <ClCompile Include="src\Building.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\StarvingEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Events.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\SmallHouse.h" />
     <ClInclude Include="src\Living.h" />
     <ClInclude Include="src\Building.h" />
+    <ClInclude Include="src\StarvingEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

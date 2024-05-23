@@ -9,6 +9,8 @@
 #include "Lumberjack.h"
 #include "Farm.h"
 
+#include "StarvingEvent.h"
+
 class Backend {
 	public:
 		Backend();
@@ -65,16 +67,15 @@ class Backend {
 		} assets;
 
 		bool et = false;
+		int m_starvCount = 0;
 		SmallHouse sh;
 		Lumberjack lj;
 		Farm f;
 
-		//template <typename T>
 		void build(Building* bt, std::vector<Building*>* v_bt);
 
 		void buildFactory();
 
-		//template<typename T>
 		int addToBQueue(Building* bt, std::vector<Building*>& v_bt, int turns);
 
 		template<typename T>
@@ -84,9 +85,7 @@ class Backend {
 
 		void updatePopInc(std::vector<Building*>& bt);
 
-		template<typename T>
-		void updatePopDec(std::vector<T>& bt);
-
+		void updatePopDec(std::vector<Building*>& bt, int amount);
 
 		void generateGoods(std::vector<Building*>& g);
 

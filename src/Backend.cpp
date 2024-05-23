@@ -47,7 +47,11 @@ Backend::Backend() {
 		generateGoods(assets.ljv);
 		generateGoods(assets.fv);
 
-		generateConsume(assets.shv);
+		if (generateConsume(assets.shv) < 0) {
+			StarvingEvent starv(2 + m_starvCount, assets.shv);
+			starv.execute();
+			m_starvCount++;
+		}
 		
 		///*building generation*///
 		buildFactory();
@@ -162,8 +166,11 @@ void Backend::updatePopInc(std::vector<Building*>& btv) {
 	}
 }
 
-template<typename T>
-void Backend::updatePopDec(std::vector<T>& bt) {
+void Backend::updatePopDec(std::vector<Building*>& bt, int amount) {
+	for (auto i = bt.begin(); i != bt.end();++i) {
+		(*i)->moveOut(amount);
+		updateUnemployed();
+	}
 }
 
 void Backend::updatePops() {
