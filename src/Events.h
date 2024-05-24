@@ -7,6 +7,6 @@ class Events {
 		Events(const std::string& evN) : m_evName(evN) {}
 
 		void virtual execute() = 0;
-	private:
+	protected:
 		std::string m_evName;
 };
