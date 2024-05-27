@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <map>
 
 #include "Building.h"
@@ -7,9 +8,10 @@ class Living : public Building
 {
 	protected:
 
-		float sol;
+		int sol;
 		float happiness;
 		float health;
+		int devotion;
 
 
 	public:
@@ -19,9 +21,13 @@ class Living : public Building
 		float calcHappy();
 		float calcHealth();
 
-		float getSol();
+		int getSol();
+		int setSol(int am);
 		float getHappiness();
 		float getHealth();
+
+		int getDevotion();
+		int setDevotion(int am);
 
 		~Living();
 };

@@ -48,6 +48,18 @@
     <ClCompile Include="src\Events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\StarvingEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RefugeeEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FireEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Church.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Building.h">
@@ -78,6 +90,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StarvingEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefugeeEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FireEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Church.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

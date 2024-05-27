@@ -24,24 +24,25 @@ class Building
 	public:
 		Building() {}
 
-		void moveIn(const int& modifier);
-		void moveOut(const int& modifier);
+		virtual void moveIn(const int& modifier);
+		virtual void moveOut(const int& modifier);
 
-		unsigned int getNumPop();
-		unsigned int getMaxPop();
+		virtual unsigned int getNumPop();
+		virtual unsigned int getMaxPop();
 
-		unsigned int getHp();
-		unsigned int getBuildTime();
-		unsigned int getCount();
-		unsigned int getSpaceUsed();
+		virtual unsigned int getHp();
+		virtual void changeHp(int amount);
+		virtual unsigned int getBuildTime();
+		virtual unsigned int getCount();
+		virtual unsigned int getSpaceUsed();
 
-		unsigned int getCosts();
-		InvManagement::products getBuildMat();
-		bool getIsLiving();
-		std::map<InvManagement::products, int> getConsumption();
-		InvManagement::products getProduct();
-		int createGoods(const float& curJobs, const int& maxJobs);
-		float getBaseProd();
+		virtual unsigned int getCosts();
+		virtual InvManagement::products getBuildMat();
+		virtual bool getIsLiving();
+		virtual std::map<InvManagement::products, int> getConsumption();
+		virtual InvManagement::products getProduct();
+		virtual int createGoods(const float& curJobs, const int& maxJobs);
+		virtual float getBaseProd();
 		
 
 

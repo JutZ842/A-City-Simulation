@@ -10,7 +10,5 @@ class Production : public Building
 
 	public:
 		Production();
-
-
 		~Production();
 };

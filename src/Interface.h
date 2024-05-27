@@ -6,7 +6,10 @@ class Interface
 {
 	public:
 		//todo in theory if this is the only function that gets called through the backend this could be the constructor
-		Interface(const int& curLivPop, const int& curWorkPop, const int& turn);
+		Interface(const int& curLivPop, const int& curWorkPop, const int& turn, const float& devotion);
+
+
+
 		//void getInv(const std::map<products, float>& inv) {
 		//	
 		//}
@@ -14,12 +17,14 @@ class Interface
 		void updateCLP(const int& curLivPop);
 		void updateCWP(const int& curWorkPop);
 		void updateT(const int& turn);
+		void updateDev(const float& devotion);
 	private:
-		int clP;
-		int cwP;
-		int t;
+		int m_clP = 0;
+		int m_cwP = 0;
+		int m_t = 0;
+		float m_dev = 0.0f;
 		
-		char i;
+		char m_i;
 
 		void infoScreen();
 		int standardScreen();

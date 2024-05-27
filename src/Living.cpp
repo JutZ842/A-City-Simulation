@@ -15,8 +15,12 @@ float Living::calcHealth() {
 	return 0.0f;
 }
 
-float Living::getSol() {
+int Living::getSol() {
 	return sol;
+}
+
+int Living::setSol(int am) {
+	return sol += am;
 }
 
 float Living::getHappiness() {
@@ -25,6 +29,17 @@ float Living::getHappiness() {
 
 float Living::getHealth() {
 	return health;
+}
+
+int Living::getDevotion() {
+	return devotion;
+}
+
+int Living::setDevotion(int am) {
+	if (devotion + am >= numPop) {
+		return devotion = numPop;
+	}
+	return devotion += am;
 }
 
 Living::~Living(){}

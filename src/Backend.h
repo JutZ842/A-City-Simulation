@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <iostream>
+#include <algorithm>
 
 #include "Interface.h"
 #include "InvManagement.h"
@@ -8,6 +10,7 @@
 #include "SmallHouse.h"
 #include "Lumberjack.h"
 #include "Farm.h"
+#include "Church.h"
 
 #include "StarvingEvent.h"
 
@@ -61,16 +64,21 @@ class Backend {
 
 		//todo maybe a template class or something that makes adding assests easier
 		struct {
+			SmallHouse sh;
+			Lumberjack lj;
+			Farm f;
+			Church c;
+
 			std::vector<Building*>shv;
 			std::vector<Building*>ljv;
 			std::vector<Building*>fv;
+			std::vector<Building*>cv;
 		} assets;
 
 		bool et = false;
 		int m_starvCount = 0;
-		SmallHouse sh;
-		Lumberjack lj;
-		Farm f;
+
+
 
 		void build(Building* bt, std::vector<Building*>* v_bt);
 
@@ -89,9 +97,15 @@ class Backend {
 
 		void generateGoods(std::vector<Building*>& g);
 
+		void updateDevotion(std::vector<Building*>& v_house, std::vector<Building*>& v_church);
+
+		float calcDevotion(const std::vector<Building*>& v_bt);
+
+		void updateSol(std::vector<Building*> v_bt);
+
 		int generateConsume(const std::vector<Building*>& v);
 
-		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t);
+		void updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t, const float& dev);
 
 		int updateUnemployed();
 

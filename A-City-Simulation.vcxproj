@@ -143,6 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Church.cpp" />
+    <ClCompile Include="src\FireEvent.cpp" />
+    <ClCompile Include="src\RefugeeEvent.cpp" />
     <ClCompile Include="src\Events.cpp" />
     <ClCompile Include="src\Farm.cpp" />
     <ClCompile Include="src\InvManagement.cpp" />
@@ -154,8 +157,12 @@
     <ClCompile Include="src\Living.cpp" />
     <ClCompile Include="src\Building.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\StarvingEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Church.h" />
+    <ClInclude Include="src\FireEvent.h" />
+    <ClInclude Include="src\RefugeeEvent.h" />
     <ClInclude Include="src\Events.h" />
     <ClInclude Include="src\Farm.h" />
     <ClInclude Include="src\InvManagement.h" />
@@ -166,6 +173,7 @@
     <ClInclude Include="src\SmallHouse.h" />
     <ClInclude Include="src\Living.h" />
     <ClInclude Include="src\Building.h" />
+    <ClInclude Include="src\StarvingEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

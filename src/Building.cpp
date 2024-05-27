@@ -20,6 +20,10 @@ unsigned int Building::getHp() {
     return hp;
 }
 
+void Building::changeHp(int amount) {
+    hp += amount;
+}
+
 unsigned int Building::getBuildTime() {
     return bt;
 }

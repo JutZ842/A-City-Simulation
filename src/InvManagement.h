@@ -18,7 +18,9 @@ class InvManagement
 			iron,
 
 			wheat,
-			bread
+			bread,
+
+			devotion
 		};
 
 		int getStock(const products& product);
