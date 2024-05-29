@@ -7,8 +7,13 @@ Backend::Backend() {
 	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.shv));
 
 	InvManagement::get().addToStock(InvManagement::wheat, 1000);
-	assets.shv.push_back(&assets.sh);
-	assets.shv.push_back(&assets.sh);
+	assets.shv.push_back(new SmallHouse);
+	assets.shv.push_back(new SmallHouse);
+	assets.shv.push_back(new SmallHouse);
+	assets.ljv.push_back(new Lumberjack);
+	assets.ljv.push_back(new Lumberjack);
+	assets.fv.push_back(new Farm);
+	
 	//game loop
 	while (true) {
 		et = false;
@@ -42,10 +47,10 @@ Backend::Backend() {
 		save();
 		//todo a class might be beneficial to avoid blank repition
 		///*Living update First*///
-		updatePopInc(assets.shv);
+		updateLivPopInc(assets.shv);
 
 		///*Production generation*///
-		//updatePopInc(assets.ljv);
+		updateWorkPopInc(assets.ljv);
 		//updatePopInc(assets.fv);
 
 		generateGoods(assets.ljv);
@@ -58,7 +63,7 @@ Backend::Backend() {
 			e_starv->execute();
 			m_starvCount++;
 		}
-		if (rand() % 100 < 5) {
+		if (rand() % 100 > 500) {
 			auto e_fire = std::make_unique<FireEvent>(20, assets.shv);
 			e_fire->execute();
 		}
@@ -76,6 +81,7 @@ Backend::Backend() {
 		if (assets.fv.size() > 0) {
 			std::cout << "A Farm has been build. There are now: " << assets.fv.size() << "\n";
 		}
+		system("CLS");
 		game.turn++;
 	}	
 }
@@ -157,22 +163,16 @@ void Backend::buildFactory() {
 
 void Backend::remove(std::vector<Building*> &v_bt) {
 	v_bt.erase(v_bt.end());
-	std::cout << "You have now " << bt.size() << " of Type " << "\n";
+	std::cout << "You have now " << v_bt.size() << " of Type " << "\n";
 }
 
-void Backend::updatePopInc(std::vector<Building*>& btv) {
+void Backend::updateLivPopInc(std::vector<Building*>& btv) {
 	
 	std::cout << "Btv Size: " << btv.size() << "\n";
 	for (int i = 0; i < btv.size();++i) {
 		int modifier = 2;
 
 		//todo const value(2) for now will be calculated with a stupid calc
-		if (!btv[i]->getIsLiving()) {
-			int unemployed = updateUnemployed();
-			if (unemployed < 2) {
-				modifier = pops.unemployed;
-			}
-		}
 		int curPop = btv[i]->getNumPop();
 		int maxPop = btv[i]->getMaxPop();
 
@@ -181,6 +181,8 @@ void Backend::updatePopInc(std::vector<Building*>& btv) {
 		int newPop = std::min(curPop + modifier, maxPop);
 
 		btv[i]->moveIn(newPop - curPop);
+		pops.liv += newPop - curPop;
+
 
 
 		std::cout << "After on Index " << i << ": NumPops: " << btv[i]->getNumPop() << " MaxPop : " << btv[i]->getMaxPop() << "\n";
@@ -189,6 +191,27 @@ void Backend::updatePopInc(std::vector<Building*>& btv) {
 		std::cout << "on index: " << i << "\n";
 		std::cout << "numpops: " << btv[i]->getNumPop() << "\n";
 
+	}
+}
+
+void Backend::updateWorkPopInc(std::vector<Building*>& btv) {
+	std::cout << "Btv Size: " << btv.size() << "\n";
+	for (int i = 0; i < btv.size(); ++i) {
+		int modifier = 2;
+		int unemployed = updateUnemployed();
+
+
+		if (unemployed < 2) {
+			modifier = pops.unemployed;
+		}
+		int curPop = btv[i]->getNumPop();
+		int maxPop = btv[i]->getMaxPop();
+
+		int newPop = std::min(curPop + modifier, maxPop);
+
+		btv[i]->moveIn(newPop - curPop);
+		pops.work += newPop - curPop;
+		pops.unemployed -= newPop - curPop;
 	}
 }
 

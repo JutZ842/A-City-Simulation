@@ -1,4 +1,6 @@
 #pragma once
+#include <stdlib.h>
+
 #include <vector>
 #include <map>
 #include <iostream>
@@ -88,12 +90,15 @@ class Backend {
 
 		int addToBQueue(Building* bt, std::vector<Building*>& v_bt, int turns);
 
-		template<typename T>
-		void remove(std::vector<T>& bt);
+		void remove(std::vector<Building*>& bt);
+
+		void updateLivPopInc(std::vector<Building*>& btv);
 
 		int calcPeople(std::vector<Building*>& bt);
 
 		void updatePopInc(std::vector<Building*>& bt);
+
+		void updateWorkPopInc(std::vector<Building*>& btv);
 
 		void updatePopDec(std::vector<Building*>& bt, int amount);
 
