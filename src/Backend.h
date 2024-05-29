@@ -13,10 +13,12 @@
 #include "Church.h"
 
 #include "StarvingEvent.h"
+#include "FireEvent.h"
 
 class Backend {
 	public:
 		Backend();
+		~Backend();
 
 	private:
 
