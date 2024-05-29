@@ -5,7 +5,7 @@ void Building::moveIn(const int& modifier) {
 }
 
 void Building::moveOut(const int& modifier) {
-    numPop > 0 ? numPop -= modifier : numPop = 0;
+    numPop - modifier > 0 ? numPop -= modifier : numPop = 0;
 }
 
 unsigned int Building::getNumPop() {

@@ -4,15 +4,13 @@ Backend::Backend() {
 	pops.liv = 0;
 	pops.work = 0;
 
-	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.shv));
+	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv));
 
 	InvManagement::get().addToStock(InvManagement::wheat, 1000);
-	assets.shv.push_back(new SmallHouse);
-	assets.shv.push_back(new SmallHouse);
-	assets.shv.push_back(new SmallHouse);
-	assets.ljv.push_back(new Lumberjack);
-	assets.ljv.push_back(new Lumberjack);
-	assets.fv.push_back(new Farm);
+	assets.v_liv.push_back(new SmallHouse);
+	assets.v_liv.push_back(new SmallHouse);
+	assets.v_work.push_back(new Lumberjack);
+	assets.v_work.push_back(new Farm);
 	
 	//game loop
 	while (true) {
@@ -20,25 +18,24 @@ Backend::Backend() {
 		//turn loop
 		//user input
 		InvManagement::get().addToStock(InvManagement::wood, 100);
-		pops.liv = calcPeople(assets.shv);
-		pops.work = calcPeople(assets.ljv) + calcPeople(assets.fv);
+		pops.liv = calcPeople(assets.v_liv);
+		pops.work = calcPeople(assets.v_work);
 
-		updateGUI(gui, pops.liv, pops.work, game.turn, calcDevotion(assets.shv));
+		updateGUI(gui, pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv));
 		while (et == false) {
 			int action = gui.InterfaceInit();
 
 			if (action == 1) {
-				addToBQueue(new SmallHouse, assets.shv, assets.sh.getBuildTime());
+				addToBQueue(new SmallHouse, assets.v_liv, assets.sh.getBuildTime());
 			}
 			if (action == 2) {
-				addToBQueue(new Lumberjack, assets.ljv, assets.lj.getBuildTime());
+				addToBQueue(new Lumberjack, assets.v_work, assets.lj.getBuildTime());
 			}
 			if (action == 3) {
-				addToBQueue(new Farm, assets.fv, assets.f.getBuildTime());
+				addToBQueue(new Farm, assets.v_work, assets.f.getBuildTime());
 			}
-		
 			if (action == 4) {
-				addToBQueue(new Church, assets.cv, assets.c.getBuildTime());
+				addToBQueue(new Church, assets.v_spec, assets.c.getBuildTime());
 			}
 			if (action == 10) {
 				et = true;
@@ -47,39 +44,39 @@ Backend::Backend() {
 		save();
 		//todo a class might be beneficial to avoid blank repition
 		///*Living update First*///
-		updateLivPopInc(assets.shv);
+		updateLivPopInc(assets.v_liv);
 
 		///*Production generation*///
-		updateWorkPopInc(assets.ljv);
+		updateWorkPopInc(assets.v_work);
 		//updatePopInc(assets.fv);
 
-		generateGoods(assets.ljv);
-		generateGoods(assets.fv);
+		generateGoods(assets.v_work);
+		//generateGoods(assets.fv);
 
-		updateDevotion(assets.shv, assets.cv);
+		updateDevotion(assets.v_liv, assets.v_spec);
 
-		if (generateConsume(assets.shv) < 0) {		
-			auto e_starv = std::make_unique<StarvingEvent>(2 + m_starvCount, assets.shv);
+		if (generateConsume(assets.v_liv) < 0) {		
+			auto e_starv = std::make_unique<StarvingEvent>(2 + m_starvCount, assets.v_liv);
 			e_starv->execute();
 			m_starvCount++;
 		}
-		if (rand() % 100 > 500) {
-			auto e_fire = std::make_unique<FireEvent>(20, assets.shv);
+		if (rand() % 100 < 100) {
+			auto e_fire = std::make_unique<FireEvent>(20, assets.v_liv);
 			e_fire->execute();
 		}
 		
 		///*building generation*///
 		buildFactory();
-		std::cout << "Number of Small Houses: " << assets.shv.size() << "\n";
+		std::cout << "Number of Small Houses: " << assets.v_liv.size() << "\n";
 
-		if (assets.shv.size() > 0) {
-			std::cout << "A Small House has been build. There are now: " << assets.shv.size() << "\n";
+		if (assets.v_liv.size() > 0) {
+			std::cout << "A Small House has been build. There are now: " << assets.v_liv.size() << "\n";
 		}
-		if (assets.ljv.size() > 0) {
-			std::cout << "A Lumber Jack has been build. There are now: " << assets.ljv.size() << "\n";
-		}
-		if (assets.fv.size() > 0) {
-			std::cout << "A Farm has been build. There are now: " << assets.fv.size() << "\n";
+		
+
+		auto pos = std::find_if(assets.v_work.begin(), assets.v_work.end(), [](Building* b) {return dynamic_cast<Lumberjack*>(b) != nullptr; });
+		if (assets.v_work.size() > 0) {
+			std::cout << "A Working Building has been build. There are now: " << assets.v_work.size() << "\n";
 		}
 		system("CLS");
 		game.turn++;
@@ -197,21 +194,26 @@ void Backend::updateLivPopInc(std::vector<Building*>& btv) {
 void Backend::updateWorkPopInc(std::vector<Building*>& btv) {
 	std::cout << "Btv Size: " << btv.size() << "\n";
 	for (int i = 0; i < btv.size(); ++i) {
-		int modifier = 2;
-		int unemployed = updateUnemployed();
+		if (pops.liv > pops.work) {
+			int modifier = 2;
+			int unemployed = updateUnemployed();
 
 
-		if (unemployed < 2) {
-			modifier = pops.unemployed;
+			if (unemployed < 2) {
+				modifier = pops.unemployed;
+			}
+			int curPop = btv[i]->getNumPop();
+			int maxPop = btv[i]->getMaxPop();
+
+			int newPop = std::min(curPop + modifier, maxPop);
+
+			btv[i]->moveIn(newPop - curPop);
+			pops.work += newPop - curPop;
+			pops.unemployed -= newPop - curPop;
+		}else{
+			btv[i]->moveOut(pops.work - pops.liv);
+			pops.work -= pops.liv;
 		}
-		int curPop = btv[i]->getNumPop();
-		int maxPop = btv[i]->getMaxPop();
-
-		int newPop = std::min(curPop + modifier, maxPop);
-
-		btv[i]->moveIn(newPop - curPop);
-		pops.work += newPop - curPop;
-		pops.unemployed -= newPop - curPop;
 	}
 }
 
@@ -251,16 +253,16 @@ void Backend::updateDevotion(std::vector<Building*>& v_house, std::vector<Buildi
 	}
 }
 
-float Backend::calcDevotion(const std::vector<Building*>& v_bt) {
-	float total = 0;
-	int count = 0;
+int Backend::calcDevotion(const std::vector<Building*>& v_bt) {
+	int devoted = 0;
+	int total = 0;
 	for (Building* b : v_bt) {
 		Living* i = dynamic_cast<Living*>(b);
-		total += i->getDevotion();
-		count++;
+		devoted += i->getDevotion();
+		total+= i->getNumPop();
 	}
-	if (count == 0) { return 0; }
-	return (total / count) * 10;
+	if (total == 0) { return 0; }
+	return (devoted * 100) / total;
 }
 
 void Backend::updateSol(std::vector<Building*>v_bt) {
@@ -276,9 +278,9 @@ void Backend::save() {
 
 	his.turn = game.turn;
 
-	his.hisFv = assets.fv;
-	his.hisLjv = assets.ljv;
-	his.hisShv = assets.shv;
+	his.v_hisLiv = assets.v_liv;
+	his.v_hisWork = assets.v_work;
+	his.v_hisSpec = assets.v_spec;
 
 	his.liv = pops.liv;
 	his.work = pops.work;
@@ -295,9 +297,9 @@ void Backend::save() {
 void Backend::undo(const int& t) {
 	game.turn = game.history[t].turn;
 
-	assets.fv = game.history[t].hisFv;
-	assets.ljv = game.history[t].hisLjv;
-	assets.shv = game.history[t].hisShv;
+	assets.v_liv = game.history[t].v_hisLiv;
+	assets.v_work = game.history[t].v_hisWork;
+	assets.v_spec = game.history[t].v_hisSpec;
 
 	pops.liv = game.history[t].liv;
 	pops.work = game.history[t].work;
@@ -310,7 +312,7 @@ void Backend::undo(const int& t) {
 }
 
 Backend::~Backend() {
-	for (auto& i : assets.shv) {
-		delete i;
+	for (auto& i : assets.v_liv) {
+		delete &i;
 	}
 }

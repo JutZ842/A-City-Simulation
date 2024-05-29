@@ -41,9 +41,12 @@ class Backend {
 		struct Save {
 			int turn;
 
-			std::vector<Building*>hisShv;
-			std::vector<Building*>hisLjv;
-			std::vector<Building*>hisFv;
+			/*Building to live*/
+			std::vector<Building*>v_hisLiv;
+			/*Building to work*/
+			std::vector<Building*>v_hisWork;
+			/*Special Building*/
+			std::vector<Building*>v_hisSpec;
 
 			int liv;
 			int work;
@@ -73,10 +76,13 @@ class Backend {
 			Farm f;
 			Church c;
 
-			std::vector<Building*>shv;
-			std::vector<Building*>ljv;
-			std::vector<Building*>fv;
-			std::vector<Building*>cv;
+			/*Building to live*/
+			std::vector<Building*>v_liv;
+			/*Building to work*/
+			std::vector<Building*>v_work;
+			/*Special Building*/
+			std::vector<Building*>v_spec;
+
 		} assets;
 
 		bool et = false;
@@ -96,8 +102,6 @@ class Backend {
 
 		int calcPeople(std::vector<Building*>& bt);
 
-		void updatePopInc(std::vector<Building*>& bt);
-
 		void updateWorkPopInc(std::vector<Building*>& btv);
 
 		void updatePopDec(std::vector<Building*>& bt, int amount);
@@ -106,7 +110,7 @@ class Backend {
 
 		void updateDevotion(std::vector<Building*>& v_house, std::vector<Building*>& v_church);
 
-		float calcDevotion(const std::vector<Building*>& v_bt);
+		int calcDevotion(const std::vector<Building*>& v_bt);
 
 		void updateSol(std::vector<Building*> v_bt);
 

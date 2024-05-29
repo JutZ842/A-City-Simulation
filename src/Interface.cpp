@@ -4,7 +4,7 @@
 #include "Interface.h"
 
 
-Interface::Interface(const int& curLivPop, const int& curWorkPop, const int& turn, const float& devotion) : m_clP(curLivPop), m_cwP(curWorkPop), m_t(turn), m_dev(devotion) {}
+Interface::Interface(const int& curLivPop, const int& curWorkPop, const int& turn, const int& devotion) : m_clP(curLivPop), m_cwP(curWorkPop), m_t(turn), m_dev(devotion) {}
 
 int Interface::InterfaceInit() {
 	return standardScreen();
@@ -22,7 +22,7 @@ void Interface::updateT(const int& turn) {
 	m_t = turn;
 }
 
-void Interface::updateDev(const float& devotion) {
+void Interface::updateDev(const int& devotion) {
 	m_dev = devotion;
 }
 
@@ -36,7 +36,7 @@ void Interface::infoScreen() {
 	std::cout << "\nPops\n";
 	std::cout << "You currently have " << m_clP << " Pops\n";
 	std::cout << "You currently have " << m_cwP << " employed Pops\n";
-	std::cout << "The Devotion of your Pops is:  " << int(m_dev) << "%\n";
+	std::cout << "The Devotion of your Pops is:  " << m_dev << "%\n";
 	for (size_t i = 0; i < 64; i++) {
 		std::cout << "-";
 	}
