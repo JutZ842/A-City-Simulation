@@ -1,5 +1,0 @@
-﻿  Backend.cpp
-c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(129,55): warning C4018: '>=': signed/unsigned mismatch
-c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(239,79): warning C4244: 'argument': conversion from 'unsigned int' to 'const float', possible loss of data
-c:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(249,22): warning C4018: '<': signed/unsigned mismatch
-  A-City-Simulation.vcxproj -> c:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe
