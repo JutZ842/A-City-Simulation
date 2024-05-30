@@ -7,15 +7,13 @@
 class Living : public Building
 {
 	protected:
-
-		int sol;
-		float happiness;
-		float health;
-		int devotion;
-
+		int p_sol;
+		float p_happiness;
+		float p_health;
+		int p_devotion;
 
 	public:
-		Living();
+		Living(const int spaceUsed, int hp, int bt, int numPop, const int maxPop, const int costs, const InvManagement::products buildMat, std::map<InvManagement::products, int> consumption);
 
 		float calcSol();
 		float calcHappy();

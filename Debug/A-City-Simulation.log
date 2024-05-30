@@ -1,2 +1,12 @@
-﻿  Building.cpp
-  A-City-Simulation.vcxproj -> c:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe
+﻿  Backend.cpp
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(10,55): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(27,62): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(115,16): warning C4244: 'argument': conversion from 'const float' to 'const int', possible loss of data
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(179,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(206,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(243,79): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\Backend.cpp(253,22): warning C4018: '<': signed/unsigned mismatch
+  StarvingEvent.cpp
+C:\Users\Frank\Desktop\A-City-Simulation\A-City-Simulation\src\StarvingEvent.cpp(7,24): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  A-City-Simulation.vcxproj -> C:\Users\Frank\Desktop\A-City-Simulation\Debug\A-City-Simulation.exe

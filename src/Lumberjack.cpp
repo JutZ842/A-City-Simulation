@@ -1,19 +1,3 @@
-#include "InvManagement.h"
 #include "Lumberjack.h"
 
-Lumberjack::Lumberjack() {	
-	spaceUsed = 1;
-	hp = 120;
-	costs = 1;
-	bt = 1;
-
-
-	numPop = 0;
-	maxPop = 10;
-	baseProd = 2;
-
-	product = InvManagement::wood;
-
-
-
-}
+Lumberjack::Lumberjack() : Production(1, 120, 1, 0, 10, 1, InvManagement::none, InvManagement::wood, { {InvManagement::none, 0} }, 2) {}

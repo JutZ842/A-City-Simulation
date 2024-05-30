@@ -7,11 +7,14 @@ Backend::Backend() {
 	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv));
 
 	InvManagement::get().addToStock(InvManagement::wheat, 1000);
+	InvManagement::get().addToStock(InvManagement::none, INFINITY);
 	assets.v_liv.push_back(new SmallHouse);
 	assets.v_liv.push_back(new SmallHouse);
 	assets.v_work.push_back(new Lumberjack);
 	assets.v_work.push_back(new Farm);
-	
+
+	ReachedVillageLevelEvent::get().execute();
+
 	//game loop
 	while (true) {
 		et = false;
@@ -37,6 +40,9 @@ Backend::Backend() {
 			if (action == 4) {
 				addToBQueue(new Church, assets.v_spec, assets.c.getBuildTime());
 			}
+			if (action == 5 && ReachedVillageLevelEvent::get().reachedLevel()) {
+				addToBQueue(new MediumHouse, assets.v_liv, assets.mh.getBuildTime());
+			}
 			if (action == 10) {
 				et = true;
 			}
@@ -60,7 +66,7 @@ Backend::Backend() {
 			e_starv->execute();
 			m_starvCount++;
 		}
-		if (rand() % 100 < 100) {
+		if (rand() % 99 < 4) {
 			auto e_fire = std::make_unique<FireEvent>(20, assets.v_liv);
 			e_fire->execute();
 		}
@@ -68,6 +74,10 @@ Backend::Backend() {
 		///*building generation*///
 		buildFactory();
 		std::cout << "Number of Small Houses: " << assets.v_liv.size() << "\n";
+		if (pops.liv > 100) {
+			//trigger event for level up
+		}
+
 
 		if (assets.v_liv.size() > 0) {
 			std::cout << "A Small House has been build. There are now: " << assets.v_liv.size() << "\n";

@@ -1,16 +1,2 @@
 #include "Farm.h"
-
-Farm::Farm() {
-	spaceUsed = 2;
-	hp = 100;
-	bt = 2;
-
-	numPop = 0;
-	maxPop = 10;
-
-	costs = 2;
-	buildMat = InvManagement::wood;
-
-	baseProd = 4;
-	product = InvManagement::wheat;
-}
+Farm::Farm() : Production(2, 100, 2, 0, 10, 2, InvManagement::wood, InvManagement::wheat, { { InvManagement::none, 0 } }, 4) {}

@@ -1,6 +1,6 @@
 #include "Living.h"
 
-Living::Living() { isLiving = true; }
+Living::Living(const int spaceUsed, int hp, int bt, int numPop, const int maxPop, const int costs, const InvManagement::products buildMat, std::map<InvManagement::products, int> consumption) : Building(spaceUsed, hp, bt, numPop, maxPop, costs, buildMat, InvManagement::none, true, consumption, 0) {}
 
 float Living::calcSol() {
 	return 0.0f;
@@ -8,7 +8,7 @@ float Living::calcSol() {
 
 float Living::calcHappy() {
 	//some unimportant calculations
-	return ( sol + health ) / numPop;
+	return ( p_sol + p_health ) / p_numPop;
 }
 
 float Living::calcHealth() {
@@ -16,30 +16,30 @@ float Living::calcHealth() {
 }
 
 int Living::getSol() {
-	return sol;
+	return p_sol;
 }
 
 int Living::setSol(int am) {
-	return sol += am;
+	return p_sol += am;
 }
 
 float Living::getHappiness() {
-	return happiness;
+	return p_happiness;
 }
 
 float Living::getHealth() {
-	return health;
+	return p_health;
 }
 
 int Living::getDevotion() {
-	return devotion;
+	return p_devotion;
 }
 
 int Living::setDevotion(int am) {
-	if (devotion + am >= numPop) {
-		return devotion = numPop;
+	if (p_devotion + am >= p_numPop) {
+		return p_devotion = p_numPop;
 	}
-	return devotion += am;
+	return p_devotion += am;
 }
 
 Living::~Living(){}

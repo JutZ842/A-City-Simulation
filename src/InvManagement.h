@@ -13,6 +13,7 @@ class InvManagement
 		void operator=(const InvManagement&) = delete;
 
 		const enum products {
+			none,
 			wood,
 			stone,
 			iron,

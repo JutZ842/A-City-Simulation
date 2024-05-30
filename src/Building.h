@@ -5,38 +5,37 @@
 class Building
 {
 	protected:
-		unsigned int spaceUsed;
-		unsigned int hp;
-		unsigned int bt;
-		unsigned int buildingCount;
+		int p_spaceUsed;
+		int p_hp;
+		int p_bt;
 
-		unsigned int numPop = 0;
-		unsigned int maxPop = 0;
+		int p_numPop = 0;
+		int p_maxPop = 0;
 
-		unsigned int costs;
-		InvManagement::products buildMat;
-		InvManagement::products product;
+		int p_costs;
+		InvManagement::products p_buildMat;
+		InvManagement::products p_product;
 
-		bool isLiving;
-		std::map<InvManagement::products, int> consumption;
-		float baseProd;
+		bool p_isLiving;
+		std::map<InvManagement::products, int> p_consumption;
+		float p_baseProd;
 
 	public:
-		Building() {}
+		Building(const int spaceUsed, int hp, int bt, int numPop, const int maxPop, const int costs, const InvManagement::products buildMat, const InvManagement::products product, const bool& isLiving, std::map<InvManagement::products, int> consumption, const float baseProd);
 
 		virtual void moveIn(const int& modifier);
 		virtual void moveOut(const int& modifier);
 
-		virtual unsigned int getNumPop();
-		virtual unsigned int getMaxPop();
+		virtual int getNumPop();
+		virtual int getMaxPop();
 
-		virtual unsigned int getHp();
+		virtual int getHp();
 		virtual void changeHp(int amount);
-		virtual unsigned int getBuildTime();
-		virtual unsigned int getCount();
-		virtual unsigned int getSpaceUsed();
+		
+		virtual int getBuildTime();
+		virtual int getSpaceUsed();
+		virtual int getCosts();
 
-		virtual unsigned int getCosts();
 		virtual InvManagement::products getBuildMat();
 		virtual bool getIsLiving();
 		virtual std::map<InvManagement::products, int> getConsumption();

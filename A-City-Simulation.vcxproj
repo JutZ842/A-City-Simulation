@@ -143,6 +143,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Land.cpp" />
+    <ClCompile Include="src\ReachedHamletLevelEvent.cpp" />
+    <ClCompile Include="src\ReachedVillageLevelEvent.cpp" />
+    <ClCompile Include="src\LevelUpEvent.cpp" />
+    <ClCompile Include="src\MediumHouse.cpp" />
     <ClCompile Include="src\Church.cpp" />
     <ClCompile Include="src\FireEvent.cpp" />
     <ClCompile Include="src\RefugeeEvent.cpp" />
@@ -160,6 +165,11 @@
     <ClCompile Include="src\StarvingEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Land.h" />
+    <ClInclude Include="src\ReachedHamletLevelEvent.h" />
+    <ClInclude Include="src\ReachedVillageLevelEvent.h" />
+    <ClInclude Include="src\LevelUpEvent.h" />
+    <ClInclude Include="src\MediumHouse.h" />
     <ClInclude Include="src\Church.h" />
     <ClInclude Include="src\FireEvent.h" />
     <ClInclude Include="src\RefugeeEvent.h" />

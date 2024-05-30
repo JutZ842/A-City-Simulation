@@ -10,12 +10,15 @@
 #include "InvManagement.h"
 
 #include "SmallHouse.h"
+#include "MediumHouse.h"
 #include "Lumberjack.h"
 #include "Farm.h"
 #include "Church.h"
 
 #include "StarvingEvent.h"
 #include "FireEvent.h"
+
+#include "ReachedVillageLevelEvent.h"
 
 class Backend {
 	public:
@@ -75,6 +78,7 @@ class Backend {
 			Lumberjack lj;
 			Farm f;
 			Church c;
+			MediumHouse mh;
 
 			/*Building to live*/
 			std::vector<Building*>v_liv;
@@ -87,6 +91,7 @@ class Backend {
 
 		bool et = false;
 		int m_starvCount = 0;
+		int cityLevel = 1;
 
 
 

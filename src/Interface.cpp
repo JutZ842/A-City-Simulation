@@ -1,6 +1,3 @@
-#include <iostream>
-
-#include "InvManagement.h"
 #include "Interface.h"
 
 
@@ -77,7 +74,10 @@ int Interface::buildScreen() {
 	std::cout << "\tBuild a Lumber Jack - [2]\n";
 	std::cout << "\tBuild a Farm - [3]\n";
 	std::cout << "\tBuild a Church - [4]\n";
-	std::cout << "\tBuild something different - [5]\n";
+	if (m_reachedVillage) {
+		std::cout << "\tBuild a Medium House - [5]\n";
+	}
+	
 	std::cout << "\tNext Page - [N]\n";
 	std::cout << "\tGo Back - [B]\n";
 	std::cout << "\tNext Turn - [E]\n";
@@ -95,6 +95,8 @@ int Interface::buildScreen() {
 		return 3;
 	case '4':
 		return 4;
+	case '5':
+		return 5;
 	case 'b':
 		break;
 	case 'e':

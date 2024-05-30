@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <iostream>
+
+#include "InvManagement.h"
+#include "ReachedVillageLevelEvent.h"
 
 class Interface
 {
@@ -8,11 +12,6 @@ class Interface
 		//todo in theory if this is the only function that gets called through the backend this could be the constructor
 		Interface(const int& curLivPop, const int& curWorkPop, const int& turn, const int& devotion);
 
-
-
-		//void getInv(const std::map<products, float>& inv) {
-		//	
-		//}
 		int InterfaceInit();
 		void updateCLP(const int& curLivPop);
 		void updateCWP(const int& curWorkPop);
@@ -23,6 +22,8 @@ class Interface
 		int m_cwP = 0;
 		int m_t = 0;
 		int m_dev = 0;
+
+		bool m_reachedVillage = ReachedVillageLevelEvent::get().reachedLevel();
 		
 		char m_i;
 
