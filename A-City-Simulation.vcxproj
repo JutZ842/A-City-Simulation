@@ -143,7 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Land.cpp" />
+    <ClCompile Include="src\Land.cpp" />
     <ClCompile Include="src\ReachedHamletLevelEvent.cpp" />
     <ClCompile Include="src\ReachedVillageLevelEvent.cpp" />
     <ClCompile Include="src\LevelUpEvent.cpp" />
@@ -165,7 +165,7 @@
     <ClCompile Include="src\StarvingEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Land.h" />
+    <ClInclude Include="src\Land.h" />
     <ClInclude Include="src\ReachedHamletLevelEvent.h" />
     <ClInclude Include="src\ReachedVillageLevelEvent.h" />
     <ClInclude Include="src\LevelUpEvent.h" />

@@ -1,30 +1,34 @@
 #include "Backend.h"
 
 Backend::Backend() {
-	pops.liv = 0;
-	pops.work = 0;
 
-	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv));
-
+	Interface gui(pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv), calcScore(), m_cityLevel);
+	m_gm = gui.getGamemode();
+	setEndCondition();
 	InvManagement::get().addToStock(InvManagement::wheat, 1000);
 	InvManagement::get().addToStock(InvManagement::none, INFINITY);
-	assets.v_liv.push_back(new SmallHouse);
-	assets.v_liv.push_back(new SmallHouse);
-	assets.v_work.push_back(new Lumberjack);
-	assets.v_work.push_back(new Farm);
 
-	ReachedVillageLevelEvent::get().execute();
+	assets.v_spec.push_back(new Church);
+	assets.v_liv.push_back(new MediumHouse);
+	assets.v_liv.push_back(new MediumHouse);
+	assets.v_liv.push_back(new MediumHouse);
 
 	//game loop
-	while (true) {
+	gameLoop(gui);
+	
+}
+
+void Backend::gameLoop(Interface& gui) {
+	while (gamemode(m_gm)) {
 		et = false;
 		//turn loop
 		//user input
 		InvManagement::get().addToStock(InvManagement::wood, 100);
 		pops.liv = calcPeople(assets.v_liv);
 		pops.work = calcPeople(assets.v_work);
+		m_curScore = calcScore();
 
-		updateGUI(gui, pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv));
+		updateGUI(gui, pops.liv, pops.work, game.turn, calcDevotion(assets.v_liv), m_curScore, m_cityLevel);
 		while (et == false) {
 			int action = gui.InterfaceInit();
 
@@ -42,6 +46,9 @@ Backend::Backend() {
 			}
 			if (action == 5 && ReachedVillageLevelEvent::get().reachedLevel()) {
 				addToBQueue(new MediumHouse, assets.v_liv, assets.mh.getBuildTime());
+			}
+			if (action == -1) {
+				remove(&assets.sh, assets.v_liv);
 			}
 			if (action == 10) {
 				et = true;
@@ -61,7 +68,7 @@ Backend::Backend() {
 
 		updateDevotion(assets.v_liv, assets.v_spec);
 
-		if (generateConsume(assets.v_liv) < 0) {		
+		if (generateConsume(assets.v_liv) < 0) {
 			auto e_starv = std::make_unique<StarvingEvent>(2 + m_starvCount, assets.v_liv);
 			e_starv->execute();
 			m_starvCount++;
@@ -70,19 +77,18 @@ Backend::Backend() {
 			auto e_fire = std::make_unique<FireEvent>(20, assets.v_liv);
 			e_fire->execute();
 		}
-		
-		///*building generation*///
-		buildFactory();
-		std::cout << "Number of Small Houses: " << assets.v_liv.size() << "\n";
 		if (pops.liv > 100) {
-			//trigger event for level up
+			m_cityLevel = 2;
+		}
+		if (pops.liv > 500) {
+			m_cityLevel = 3;
 		}
 
-
+		///*building generation*///
+		buildFactory();
 		if (assets.v_liv.size() > 0) {
 			std::cout << "A Small House has been build. There are now: " << assets.v_liv.size() << "\n";
 		}
-		
 
 		auto pos = std::find_if(assets.v_work.begin(), assets.v_work.end(), [](Building* b) {return dynamic_cast<Lumberjack*>(b) != nullptr; });
 		if (assets.v_work.size() > 0) {
@@ -90,7 +96,10 @@ Backend::Backend() {
 		}
 		system("CLS");
 		game.turn++;
-	}	
+	}
+	if (m_gm > 0) {
+		gui.victoryScreen();
+	}
 }
 
 int Backend::generateConsume(const std::vector<Building*>& btv) {
@@ -108,11 +117,13 @@ int Backend::generateConsume(const std::vector<Building*>& btv) {
 	return 0;
 }
 
-void Backend::updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t, const float& dev) {
+void Backend::updateGUI(Interface& gui, const int& clP, const int& cwP, const int& t, const float& dev, const int& score, const int& level) {
 	gui.updateCLP(clP);
 	gui.updateCWP(cwP);
 	gui.updateT(t);
 	gui.updateDev(dev);
+	gui.updateScore(score);
+	gui.updateCityLevel(level);
 }
 
 int Backend::updateUnemployed() {
@@ -128,22 +139,18 @@ int Backend::calcPeople(std::vector<Building*>& bt) {
 	int curPop = 0;
 	for (auto& i : bt) {
 		curPop += i->getNumPop();
-		std::cout << "CurPop: " << curPop << "\n";
-		//i.getIsLiving() ? pops.liv = curPop : pops.work = curPop;
 	}
 	return curPop;
 }
 
 void Backend::build(Building* bt, std::vector<Building*>* v_bt) {
-	std::cout << "Reached build! pre: " << v_bt->size() << "\n";
 	v_bt->push_back(bt);
-	std::cout << "aft: " << v_bt->size() << "\n";
 }
 
 int Backend::addToBQueue(Building* bt, std::vector<Building*>& v_bt, int turns) {
 	if (InvManagement::get().getStock(bt->getBuildMat()) >= bt->getCosts()) {
 		bQueue.emplace_back(bt, &v_bt, turns);
-		std::cout << "A Building has been added to the queue " << bQueue.size() << "\n";
+		//std::cout << "A Building has been added to the queue " << bQueue.size() << "\n";
 
 		InvManagement::get().removeFromStock(bt->getBuildMat(), bt->getCosts());
 		return 0;
@@ -155,9 +162,7 @@ int Backend::addToBQueue(Building* bt, std::vector<Building*>& v_bt, int turns) 
 
 void Backend::buildFactory() {
 	for (auto i = bQueue.begin(); i != bQueue.end();) {
-		std::cout << "Reached build factory\n";
 		if (i->time == 0) {
-			std::cout << "Reached build turn\n";
 			i->v_type->push_back(i->type);
 			i = bQueue.erase(i);
 		}
@@ -168,36 +173,22 @@ void Backend::buildFactory() {
 	}
 }
 
-void Backend::remove(std::vector<Building*> &v_bt) {
+void Backend::remove(Building* bt, std::vector<Building*>& v_bt) {
 	v_bt.erase(v_bt.end());
-	std::cout << "You have now " << v_bt.size() << " of Type " << "\n";
 }
 
 void Backend::updateLivPopInc(std::vector<Building*>& btv) {
-	
-	std::cout << "Btv Size: " << btv.size() << "\n";
-	for (int i = 0; i < btv.size();++i) {
+		for (int i = 0; i < btv.size();++i) {
 		int modifier = 2;
 
 		//todo const value(2) for now will be calculated with a stupid calc
 		int curPop = btv[i]->getNumPop();
 		int maxPop = btv[i]->getMaxPop();
 
-		std::cout << "Before on Index " << i << ": NumPops: " << curPop << " MaxPop : " << maxPop << "\n";
-		std::cout << "Before on Index " << btv.size()-1 << ": NumPops: " << btv[btv.size() - 1]->getNumPop() << " MaxPop : " << btv[btv.size() - 1]->getMaxPop() << "\n";
 		int newPop = std::min(curPop + modifier, maxPop);
 
 		btv[i]->moveIn(newPop - curPop);
 		pops.liv += newPop - curPop;
-
-
-
-		std::cout << "After on Index " << i << ": NumPops: " << btv[i]->getNumPop() << " MaxPop : " << btv[i]->getMaxPop() << "\n";
-		std::cout << "After on Index " << btv.size() - 1 << ": NumPops: " << btv[btv.size() - 1]->getNumPop() << " MaxPop : " << btv[btv.size() - 1]->getMaxPop() << "\n";
-		
-		std::cout << "on index: " << i << "\n";
-		std::cout << "numpops: " << btv[i]->getNumPop() << "\n";
-
 	}
 }
 
@@ -283,6 +274,10 @@ void Backend::updateSol(std::vector<Building*>v_bt) {
 	}
 }
 
+int Backend::calcScore() {
+	return (pops.liv + pops.work - pops.unemployed);
+}
+
 void Backend::save() {
 	Save his;
 
@@ -321,8 +316,26 @@ void Backend::undo(const int& t) {
 	game.history.erase(game.history.begin() + (t + 1), game.history.end());
 }
 
+void Backend::setEndCondition() {
+	if (m_gm == 0) {
+		gamemode = [](int x) {return true; };
+	}
+	if (m_gm == 1) {
+		gamemode = [this](int x) {return m_curScore <= 100; };
+	}
+	if (m_gm == 2) {
+		gamemode = [this](int x) {return m_cityLevel < 5; };
+	}
+}
+
 Backend::~Backend() {
-	for (auto& i : assets.v_liv) {
-		delete &i;
+	for (Building* i : assets.v_liv) {
+		delete i;
+	}
+	for (Building* i : assets.v_work) {
+		delete i;
+	}
+	for (Building* i : assets.v_spec) {
+		delete i;
 	}
 }
